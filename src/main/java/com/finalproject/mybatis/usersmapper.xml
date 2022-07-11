@@ -11,7 +11,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM users
 	</select>
 	<insert id="insert" parameterType="usersVO">
-		INSERT INTO users VALUES (#{id}, #{pwd}, #{name}, #{nickname}, #{phonenum}, #{email}, #{clp}, #{usertypeid}, SYSDATE(), #{carmodelid});
+		INSERT INTO users VALUES (#{id}, #{pwd}, #{name}, #{nickname}, #{phonenum}, #{email}, 
+		#{clp}, #{usertypeid}, SYSDATE(), #{carmodelid});
 	</insert>
 	<update id="update" parameterType="usersVO">
 		UPDATE users SET pwd=#{pwd}, name=#{name}, nickname=#{nickname}, 
@@ -23,14 +24,17 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM users WHERE id=#{id}
 	</delete>
 	
-	<!-- 일반회원 정보 select -->
+	<!-- 일반회원 인원 수 select -->
 	<select id="selectcustomer" parameterType="int" resultType="usersVO">
-		SELECT * FROM users where usertypeid=100;
+		 SELECT count(*) FROM users WHERE usertypeid=100
 	</select>
 	
-	<!-- 관리자 정보 select -->
-	<select id="selectmanager" parameterType="int" resultType="usersVO">
-		SELECT * FROM users where usertypeid=200;
+	<!-- 사용자 권한 정보 (차량 모델 추가 예정)select -->
+	<select id="selectcustomerauthoritydetail" parameterType="int" resultType="usersVO">
+		SELECT u.id, u.pwd, u.name, u.nickname, u.phonenum, u.email, u.clp, u.regdate, ua.userstypename as uauserstypename  
+		FROM users u
+		INNER JOIN userauthority ua ON u.usertypeid = ua.uid
+		WHERE u.id = #{id}
 	</select>
 	
 </mapper>

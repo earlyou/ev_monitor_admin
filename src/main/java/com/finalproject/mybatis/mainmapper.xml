@@ -1,1 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalproject.mapper.MainMapper">
+
+	<!-- 고객 정보 검색 -->
+   <select id="searchcustomer" parameterType="String" resultType="usersVO">
+      SELECT * FROM users WHERE usertypeid=100 and name LIKE CONCAT('%',#{srchtext},'%')
+   </select>
+   
+   <!-- 관리자 정보 검색 -->
+   <select id="searchmanager" parameterType="String" resultType="usersVO">
+      SELECT * FROM users WHERE usertypeid=200 and name LIKE CONCAT('%',#{srchtext},'%')
+   </select>
+   
+   	<!-- 관리자 인원 수 select -->
+	<select id="selectmanager" parameterType="int" resultType="usersVO">
+		SELECT count(*) FROM users WHERE usertypeid=200
+	</select>
+
+</mapper>
