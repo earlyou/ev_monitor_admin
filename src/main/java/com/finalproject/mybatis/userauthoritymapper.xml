@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalproject.mapper.UserAuthorityMapper">
+	
+	<select id="select" parameterType="int" resultType="userauthorityVO">
+		SELECT * FROM USERSTYPE WHERE ID=#{id}
+	</select>
+	<select id="selectDetail" parameterType="int" resultType="userauthorityVO">
+		SELECT ut.id, ut.userType, ut.regdate, 
+		us.id AS usid , us.name AS usname, us.email AS usemail, us.addr AS usaddr, us.phone AS usphone 
+		FROM userstype ut
+		INNER JOIN users us ON ut.id = us.userTypeId
+		WHERE ut.id = #{id};
+	</select>
+	<select id="selectAll" resultType="userauthorityVO">
+		SELECT * FROM usertype
+	</select>
+	<select id="selectDetailAll" resultType="userauthorityVO">
+		SELECT ut.id, ut.userType, ut.regdate, 
+		us.id AS usid , us.name AS usname, us.email AS usemail, us.addr AS usaddr, us.phone AS usphone 
+		FROM userstype ut
+		INNER JOIN users us ON ut.id = us.userTypeId
+	</select>
+	<insert id="insert" parameterType="userauthorityVO">
+		INSERT INTO usersType VALUES (#{id},#{userType},CURDATE())
+	</insert>
+	<update id="update" parameterType="userauthorityVO">
+		UPDATE usertype SET USERTYPE=#{userType} WHERE ID = #{id}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM usertype WHERE ID=#{id}
+	</delete>
+	
+</mapper>
