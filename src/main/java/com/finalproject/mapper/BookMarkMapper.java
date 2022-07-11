@@ -1,5 +1,5 @@
 package com.finalproject.mapper;
 
-public class BookMarkMapper {
+public interface BookMarkMapper {
 
 }

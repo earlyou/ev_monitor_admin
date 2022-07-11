@@ -13,40 +13,40 @@ import com.finalproject.vo.UsersVO;
 public class UsersBiz implements Biz<String, UsersVO>{
 
 	@Autowired
-	UsersMapper dao;
+	UsersMapper udao;
 	
 	@Override
 	public void register(UsersVO v) throws Exception {
-		dao.insert(v);
+		udao.insert(v);
 	}
 
 	@Override
 	public void modify(UsersVO v) throws Exception {
-		dao.update(v);
+		udao.update(v);
 	}
 
 	@Override
 	public void remove(String k) throws Exception {
-		dao.delete(k);
+		udao.delete(k);
 	}
 
 	@Override
 	public UsersVO get(String k) throws Exception {
-		return dao.select(k);
+		return udao.select(k);
 	}
 
 	@Override
 	public List<UsersVO> get() throws Exception {
-		return dao.selectall();
+		return udao.selectall();
 	}
 	
 	public List<UsersVO> getCustomer() throws Exception {
-		return dao.selectcustomer();
+		return udao.selectcustomer();
 	}
 	
 	
 	public List<UsersVO> getManager() throws Exception {
-		return dao.selectmanager();
+		return udao.selectmanager();
 	}
 	
 }

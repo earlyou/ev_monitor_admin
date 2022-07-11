@@ -1,5 +1,5 @@
 package com.finalproject.mapper;
 
-public class MainMapper {
+public interface MainMapper {
 
 }
