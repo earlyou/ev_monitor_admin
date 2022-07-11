@@ -12,5 +12,6 @@ import com.finalproject.vo.UsersVO;
 public interface MainMapper {
 	public List<UsersVO> searchcustomer(String str) throws Exception;
 	public List<UsersVO> searchmanager(String str) throws Exception;
-	public List<UsersVO> selectmanager() throws Exception;
+	public int getcustomercnt() throws Exception;
+	public int getmanagercnt() throws Exception;
 }

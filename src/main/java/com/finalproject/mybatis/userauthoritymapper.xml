@@ -7,11 +7,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="select" parameterType="int" resultType="userauthorityVO">
 		SELECT * FROM userauthority WHERE utid=#{id}
 	</select>
-	<select id="selectAll" resultType="userauthorityVO">
+	<select id="selectall" resultType="userauthorityVO">
 		SELECT * FROM userauthority
 	</select>
 	<insert id="insert" parameterType="userauthorityVO">
-		INSERT INTO usersType VALUES (#{utid},#{userstypename})
+		INSERT INTO userauthority VALUES (#{utid},#{userstypename})
 	</insert>
 	<update id="update" parameterType="userauthorityVO">
 		UPDATE userauthority SET userstypename=#{userstypename} WHERE utid=#{utid}

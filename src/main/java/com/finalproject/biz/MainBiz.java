@@ -3,10 +3,12 @@ package com.finalproject.biz;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.finalproject.mapper.MainMapper;
 import com.finalproject.vo.UsersVO;
 
+@Service
 public class MainBiz {
 	
 	@Autowired
@@ -20,8 +22,11 @@ public class MainBiz {
 		return dao.searchmanager(str);	
 	}
 	
-	public List<UsersVO> getManager() throws Exception {
-		return dao.selectmanager();
+	public int getCustomerCnt() throws Exception {
+		return dao.getcustomercnt();
 	}
-
+	
+	public int getManagerCnt() throws Exception {
+		return dao.getmanagercnt();
+	}
 }

@@ -24,9 +24,14 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM users WHERE id=#{id}
 	</delete>
 	
-	<!-- 일반회원 인원 수 select -->
+	<!-- 일반회원 select -->
 	<select id="selectcustomer" parameterType="int" resultType="usersVO">
-		 SELECT count(*) FROM users WHERE usertypeid=100
+		 SELECT * FROM users WHERE usertypeid=100
+	</select>
+	
+	<!-- 관리자 select -->
+	<select id="selectmanager" parameterType="int" resultType="usersVO">
+		 SELECT * FROM users WHERE usertypeid=200
 	</select>
 	
 	<!-- 사용자 권한 정보 (차량 모델 추가 예정)select -->

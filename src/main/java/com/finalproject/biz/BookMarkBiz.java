@@ -3,11 +3,13 @@ package com.finalproject.biz;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.finalproject.frame.Biz;
 import com.finalproject.mapper.BookMarkMapper;
 import com.finalproject.vo.BookMarkVO;
 
+@Service
 public class BookMarkBiz implements Biz<Integer, BookMarkVO>{
 
 	@Autowired

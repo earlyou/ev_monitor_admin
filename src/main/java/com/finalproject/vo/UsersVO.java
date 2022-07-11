@@ -2,6 +2,17 @@ package com.finalproject.vo;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class UsersVO {
 
 	private String id;
@@ -18,7 +29,7 @@ public class UsersVO {
 	private String uauserstypename;
 
 	public UsersVO(String id, String pwd, String name, String nickname, String phonenum, String email, String clp,
-			int usertypeid, Date regdate, int carmodelid, String uauserstypename) {
+			int usertypeid, Date regdate, int carmodelid) {
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
@@ -29,11 +40,10 @@ public class UsersVO {
 		this.usertypeid = usertypeid;
 		this.regdate = regdate;
 		this.carmodelid = carmodelid;
-		this.uauserstypename = uauserstypename;
 	}
 
 	public UsersVO(String pwd, String name, String nickname, String phonenum, String email, String clp, int usertypeid,
-			Date regdate, int carmodelid, String uauserstypename) {
+			Date regdate, int carmodelid) {
 		this.pwd = pwd;
 		this.name = name;
 		this.nickname = nickname;
@@ -43,9 +53,7 @@ public class UsersVO {
 		this.usertypeid = usertypeid;
 		this.regdate = regdate;
 		this.carmodelid = carmodelid;
-		this.uauserstypename = uauserstypename;
 	}
-	
 	
 	
 	

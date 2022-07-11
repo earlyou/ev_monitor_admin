@@ -14,8 +14,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
       SELECT * FROM users WHERE usertypeid=200 and name LIKE CONCAT('%',#{srchtext},'%')
    </select>
    
+    <!-- 일반회원 인원 수 select -->
+	<select id="getcustomercnt" resultType="int">
+		SELECT count(*) FROM users WHERE usertypeid=100
+	</select>
+   
    	<!-- 관리자 인원 수 select -->
-	<select id="selectmanager" parameterType="int" resultType="usersVO">
+	<select id="getmanagercnt" resultType="int">
 		SELECT count(*) FROM users WHERE usertypeid=200
 	</select>
 

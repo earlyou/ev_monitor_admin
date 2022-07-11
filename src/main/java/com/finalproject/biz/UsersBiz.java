@@ -40,7 +40,7 @@ public class UsersBiz implements Biz<String, UsersVO>{
 		return udao.selectall();
 	}
 	
-	public List<UsersVO> getCustomer() throws Exception {
+	public int getCustomer() throws Exception {
 		return udao.selectcustomer();
 	}
 	
