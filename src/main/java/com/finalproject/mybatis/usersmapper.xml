@@ -24,12 +24,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</delete>
 	
 	<!-- 일반회원 정보 select -->
-	<select id="selectcustomer" parameterType="String" resultType="usersVO">
+	<select id="selectcustomer" parameterType="int" resultType="usersVO">
 		SELECT * FROM users where usertypeid=100;
 	</select>
 	
 	<!-- 관리자 정보 select -->
-	<select id="selectemployee" parameterType="String" resultType="usersVO">
+	<select id="selectmanager" parameterType="int" resultType="usersVO">
 		SELECT * FROM users where usertypeid=200;
 	</select>
 	

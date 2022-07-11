@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.finalproject.mapper.UserAuthorityMapper">
 	
 	<select id="select" parameterType="int" resultType="userauthorityVO">
-		SELECT * FROM USERSTYPE WHERE ID=#{id}
+		SELECT * FROM userauthority WHERE utid=#{id}
 	</select>
 	<select id="selectDetail" parameterType="int" resultType="userauthorityVO">
 		SELECT ut.id, ut.userType, ut.regdate, 
@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE ut.id = #{id};
 	</select>
 	<select id="selectAll" resultType="userauthorityVO">
-		SELECT * FROM usertype
+		SELECT * FROM userauthority
 	</select>
 	<select id="selectDetailAll" resultType="userauthorityVO">
 		SELECT ut.id, ut.userType, ut.regdate, 
@@ -24,13 +24,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN users us ON ut.id = us.userTypeId
 	</select>
 	<insert id="insert" parameterType="userauthorityVO">
-		INSERT INTO usersType VALUES (#{id},#{userType},CURDATE())
+		INSERT INTO usersType VALUES (#{utid},#{userstypename})
 	</insert>
 	<update id="update" parameterType="userauthorityVO">
-		UPDATE usertype SET USERTYPE=#{userType} WHERE ID = #{id}
+		UPDATE userauthority SET userstypename=#{userstypename} WHERE utid=#{utid}
 	</update>
 	<delete id="delete" parameterType="int">
-		DELETE FROM usertype WHERE ID=#{id}
+		DELETE FROM userauthority WHERE utid=#{utid}
 	</delete>
 	
 </mapper>
