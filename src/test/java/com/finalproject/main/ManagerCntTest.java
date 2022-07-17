@@ -16,7 +16,7 @@ class ManagerCntTest {
 	void contextLoads() {
 		int count;
 		try {
-			count = biz.getManagerCnt();
+			count = biz.getAdminCnt();
 			System.out.println(count);
 		} catch (Exception e) {
 			e.printStackTrace();

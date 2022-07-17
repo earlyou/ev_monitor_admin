@@ -1,0 +1,94 @@
+<meta charset="UTF-8">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script>
+
+$(document).ready(function(){
+	
+	$('#registerbtn').click(function(){
+		$('.fare').attr({
+			'enctype':'multipart/form-data',
+			'method':'post',
+			'action':'registerimpl'
+		});
+		$('.fare').submit();
+	});
+});
+
+</script>
+<form class="fare">
+<div class="form-group">
+    <h1 class="h2 text-gray-700 mb-25 text-center">충전요금 정보 등록</h1>
+</div>
+<br>   <br>  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cid">충전요금ID</label>
+    <div class="col-sm-4">
+      <input type="number" class="form-control" name="cid">
+    </div>
+  </div> 
+  
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="busiId">충전사업자ID</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="busiId">
+    </div>
+  </div>  
+ 
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="bnm">충전사업자명</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="bnm">
+    </div>
+  </div>  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cs">충전속도</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="cs">
+    </div>
+  </div> 
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="memYN">회원</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="memYN">
+    </div>
+  </div> 
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="apartYN">공공주택</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="apartYN">
+    </div>
+  </div>
+    
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="time">충전 시간대</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="time">
+    </div>
+  </div>  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="seasons">계절</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="seasons">
+    </div>
+  </div>  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cf">충전요금</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="cf">
+    </div>
+  </div>  
+  
+     
+ <br>  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="registerbtn" class="btn btn-success" style="width: 200px;">등록</button>
+    </div>
+  </div>  
+  
+</form>

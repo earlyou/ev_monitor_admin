@@ -1,0 +1,84 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/udbt.css" /> 
+<script>
+$(document).ready(function(){
+	$('#deletebtn').click(function(){
+		var cid = $('input[name="cid"]').val();
+		var c = confirm('삭제 하시겠습니까?');
+		if(c == true){
+			location.href='delete?cid='+cid;
+		}
+		
+	});
+	
+	$('#updatebtn').click(function(){
+		$('.fare').attr({
+			'method':'post',
+			'action':'update'
+		});
+		$('.fare').submit();
+	});
+});
+
+</script>
+
+<div class="col-lg-6">
+
+        <div class="form-group">
+    		<h1 class="h2 text-gray-700 mb-25 text-center">요금 정보 상세</h1>
+		</div>
+        <form class="fare">
+            <div class="form-group">
+                <input type="number" class="form-control form-control-user"
+                    name="cid" th:value="${sf.cid}" readonly="readonly">
+            </div>
+            
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                    name="busiId" th:value="${sf.busiId}">
+            </div>
+            
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                    name="bnm"  th:value="${sf.bnm}">
+            </div>
+           
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                    name="cs" th:value="${sf.cs}">
+            </div>
+            
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                    name="memYN" th:value="${sf.memYN}">
+            </div>
+ 
+             <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                    name="apartYN" th:value="${sf.apartYN}">
+            </div>
+            
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                    name="time" th:value="${sf.time}">
+            </div>         
+                      
+             <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                    name="seasons" th:value="${sf.seasons}">
+            </div>   
+            
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                    name="cf" th:value="${sf.cf}">
+            </div>                      
+                                  
+         	
+         	<a id="updatebtn" href="#">업데이트</a>
+            <a id="deletebtn" href="#">삭제</a>   
+            
+        </form>
+        
+
+</div>

@@ -1,0 +1,52 @@
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Station Fare Tables</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>CID</th>
+                        <th>BUSIID</th>
+                        <th>BNM</th>
+                        <th>CS</th>
+                        <th>MEMYN</th>
+                        <th>APARTYN</th>
+                        <th>TIME</th>
+                        <th>SEASONS</th>
+                        <th>CF</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>CID</th>
+                        <th>BUSIID</th>
+                        <th>BNM</th>
+                        <th>CS</th>
+                        <th>MEMYN</th>
+                        <th>APARTYN</th>
+                        <th>TIME</th>
+                        <th>SEASONS</th>
+                        <th>CF</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr th:each="sf:${sflist}">
+                        <td><a th:text="${sf.cid}" th:href="@{detail(cid=${sf.cid})}">cid</a></td>
+                        <td th:text="${sf.busiId}">busiId</td>
+                        <td th:text="${sf.bnm}">bnm</td>
+                        <td th:text="${sf.cs}">cs</td>
+                        <td th:text="${sf.memYN}">memYN</td>
+                        <td th:text="${sf.apartYN}">apartYN</td>
+                        <td th:text="${sf.time}">time</td>
+                        <td th:text="${sf.seasons}">seasons</td>
+                        <td th:text="${sf.cf}">cf</td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

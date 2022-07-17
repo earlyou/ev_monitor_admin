@@ -1,0 +1,36 @@
+#updatebtn{
+	background-color: #383838;
+    border: 1px solid #888888;
+    color: #ffffff;
+    cursor: pointer;
+    letter-spacing: normal;
+    margin-top: 10px;
+    width: 50%;
+    height: 50px;
+    word-break: keep-all;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 2.0em;
+    display: inline-block;
+    text-align:center;
+    font-weight: bold;
+}
+
+#deletebtn{
+    width: 50%;
+    height: 50px;
+    background: #DF0101;
+    cursor: pointer;
+    border: 1px solid #DF0101;
+    letter-spacing: normal;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 2.0em;
+    word-break: keep-all;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+	float: left;
+	display:inline-block
+}

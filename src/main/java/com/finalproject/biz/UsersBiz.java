@@ -44,6 +44,10 @@ public class UsersBiz implements Biz<String, UsersVO>{
 		return udao.selectcustomer();
 	}
 	
+	public int getAdmin() throws Exception {
+		return udao.selectadmin();
+	}
+	
 	public List<UsersVO> getCustomerad() throws Exception {
 		return udao.selectcustomerauthoritydetail();
 	}

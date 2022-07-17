@@ -1,0 +1,196 @@
+<meta charset="utf-8" />
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<script>
+function display_custregchart(gdata){
+	Highcharts.chart('custregchart', {
+	    chart: {
+	        type: 'column'
+	    },
+	    title: {
+	        text: '최근 6개월간 회원, 관리자 가입자 수 현황'
+	    },
+	    xAxis: {
+	        categories: gdata.evcdatearr
+	    },
+	    yAxis: {
+	        title: {
+	        	min: 0,
+	            text: '가입자 인원(명)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: true
+	            },
+	            enableMouseTracking: false
+	        }
+	    },
+	    series: [{
+	    	name: '일반회원',
+	        data: gdata.userautharr100       
+	    }, {
+	        name: '관리자',
+	        data: gdata.userautharr200 
+	    }]
+	});
+};
+
+function getCustregChart(){
+	$.ajax({
+		url:'custregchartimpl',
+		success:function(data){
+			//alert(data);
+			display_custregchart(data);
+		}
+	});	
+};
+
+$(document).ready(function(){
+	getCustregChart();
+});
+</script>
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">EV Dashboard</h1>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Customer Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Customer Count</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            	<span th:text="${custcnt}"></span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa fa-user fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Electornic Vehicle Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                               Electric Vehicle Count</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <span th:text="${carmodelcnt}"></span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-car fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+     <!-- Community Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Community Count</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <span th:text="${communitycnt}"></span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comment fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charging Type Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Charging Type Count</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"> <span th:text="${chargercnt}"></span></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa solid fa-bolt fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Admin Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                Admin Count</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            	<span th:text="${admincnt}"></span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-tasks fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                <!-- Station Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                Station Count</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            	<span th:text="${stationcnt}"></span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-battery-half fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+	<div class="row">
+         <div class="col-xl-12"> 
+           <div class="card mb-4">
+             <div class="card-body" style="border:2px solid #4273df;">
+                  <div id="custregchart"></div>
+             </div>
+            </div>
+
+          </div>
+   </div>
+     

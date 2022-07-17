@@ -1,0 +1,86 @@
+<meta charset="UTF-8">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script>
+
+$(document).ready(function(){
+	
+	$('#registerbtn').click(function(){
+		$('.carmodel').attr({
+			'enctype':'multipart/form-data',
+			'method':'post',
+			'action':'addimpl'
+		});
+		$('.carmodel').submit();
+	});
+});
+
+</script>
+<form class="carmodel">
+<div class="form-group">
+    <h1 class="h2 text-gray-700 mb-25 text-center">차량 정보 등록</h1>
+</div>
+<br>   <br>  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="carmodelid">차량모델ID</label>
+    <div class="col-sm-4">
+      <input type="number" class="form-control" name="carmodelid">
+    </div>
+  </div> 
+  
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="mname">차량 모델명</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="mname">
+    </div>
+  </div>  
+  
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="mbrand">제조사</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="mbrand">
+    </div>
+  </div>    
+  
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="mf">차량 이미지</label>
+    <div class="col-sm-4">
+      <input type="file" class="form-control" name="mf">
+    </div>
+  </div>    
+ 
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="crange">주행가능거리</label>
+    <div class="col-sm-4">
+      <input type="number" class="form-control" name="crange">
+    </div>
+  </div>  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="batterysize">차량 배터리 용량</label>
+    <div class="col-sm-4">
+      <input type="number" class="form-control" name="batterysize">
+    </div>
+  </div> 
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="fptid">급속충전핀ID</label>
+    <div class="col-sm-4">
+      <input type="number" class="form-control" name="fptid">
+    </div>
+  </div> 
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="sptid">충전레벨</label>
+    <div class="col-sm-4">
+      <input type="number" class="form-control" name="sptid">
+    </div>
+  </div>
+     
+ <br>  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="registerbtn" class="btn btn-success" style="width: 200px;">등록</button>
+    </div>
+  </div>  
+  
+</form>
