@@ -16,7 +16,7 @@ public class StationFareUpdateTest {
 	@Test
 	void contextLoads() {
 		//(int cid, String busiId, String bnm, String cs, String time, String seasons, String cf)
-		StationFareVO obj = new StationFareVO(10, "BN","블루네트웍스","완속","중간부하","봄(3~5월)","320원");
+		StationFareVO obj = new StationFareVO(5, "ME","환경부","초급속","회원", "Y", "경부하", "봄(3~5월)","320원");
 		try {
 			stationfarebiz.modify(obj);
 			System.out.println("Updated Ok");

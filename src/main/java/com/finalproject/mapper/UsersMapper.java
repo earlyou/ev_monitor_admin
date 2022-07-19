@@ -15,7 +15,8 @@ public interface UsersMapper {
 	public void update(UsersVO obj) throws Exception;
 	public UsersVO select(String obj) throws Exception;
 	public List<UsersVO> selectall() throws Exception;
-	public int selectcustomer() throws Exception;	
+	public int selectcustomer() throws Exception;
+	public int selectadmin() throws Exception;
 	public List<UsersVO> selectcustomerauthoritydetail() throws Exception;
 		
 }

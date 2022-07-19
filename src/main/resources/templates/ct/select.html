@@ -1,0 +1,49 @@
+<style>
+	td>img{
+		width: 50px;
+	}
+</style>
+<h1 class="h3 mb-2 text-gray-800">Charging Type Tables</h1>
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>PTID</th>
+                        <th>CHGERNM</th>
+                        <th>PINIMG</th>
+                        <th>EC</th>
+                        <th>VOL</th>
+                        <th>POWER</th>
+                        <th>CLEVEL</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>PTID</th>
+                        <th>CHGERNM</th>
+                        <th>PINIMG</th>
+                        <th>EC</th>
+                        <th>VOL</th>
+                        <th>POWER</th>
+                        <th>CLEVEL</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr th:each="c:${clist}">
+                        <td><a th:text="${c.ptid}" th:href="@{detail(ptid=${c.ptid})}">ptid</a></td>
+                        <td th:text="${c.chgernm}">chgernm</td>
+                        <td><img th:src="@{'/img/'+${c.pinimg}}"></td>
+                        <td th:text="${c.ec}">ec</td>
+                        <td th:text="${c.vol}">vol</td>
+                        <td th:text="${c.power}">power</td>
+                        <td th:text="${c.clevel}">clevel</td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

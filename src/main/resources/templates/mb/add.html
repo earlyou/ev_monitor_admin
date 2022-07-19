@@ -1,0 +1,167 @@
+<meta charset="UTF-8">
+   
+<script>
+
+function sendId(id){
+	$.ajax({
+		url:'/checkid',
+		data:{'id':id},
+		success:function(data){
+			if(data == '1'){
+				$('#idspan').text('이미 있는 ID입니다.');
+			}else if(data == '2'){
+				$('#idspan').text('필수 정보입니다.');	
+			}else if(data == '3'){
+				$('#idspan').text('ID는 알파벳과 숫자만 사용가능합니다.');
+			}else{
+				$('#idspan').text('사용 가능한 ID입니다.');
+			}
+		}
+	}); //ajax
+}
+
+$(document).ready(function(){
+	$('input[name="id"]').keyup(function(){
+		var id = $(this).val(); 		
+		sendId(id);
+	});	
+	
+ 	$('input[name="pwd"]').keyup(function(){
+		var pwd = $(this).val();
+		var pwdc = $('input[name="pwdc"]').val();		
+
+		if(!(pwdc==null||pwdc=='')){
+			if(pwd != pwdc){
+				$('#pwdcspan').text('비밀번호와 일치하지 않습니다.');
+			}else{
+				$('#pwdcspan').text('비밀번호와 일치합니다.');
+			} 	
+		}				
+	}); 	
+		
+	$('input[name="pwdc"]').keyup(function(){
+		var pwd = $('input[name="pwd"]').val();
+		var pwdc = $(this).val();
+		
+		if(!(pwd==null||pwd=='')){
+			if(pwd != pwdc){
+				$('#pwdcspan').text('비밀번호와 일치하지 않습니다.');
+			}else{
+				$('#pwdcspan').text('비밀번호와 일치합니다.');
+			} 	
+		}
+	});
+	
+	$('#add_bt').click(function(){
+		var id = $('input[name="id"]').val(); 
+		var pwd = $('input[name="pwd"]').val();
+		var pwdc = $('input[name="pwdc"]').val();	
+		
+		if(id==null||id==''){
+			alert('ID를 입력해주십시오.');
+		}else if(pwd==null||pwd==''||pwdc==null||pwdc==''){
+			alert('비밀번호를 입력해주십시오.');
+		}else{
+			$('#add_form').attr({
+				'method':'post',
+				'action':'addimpl' 
+			});
+			$('#add_form').submit();
+		}//if
+	});//add_bt
+});
+</script>
+
+<form class="form-horizontal" id="add_form">
+<div class="form-group">
+    <h1 class="h2 text-gray-700 mb-25 text-center">사용자 정보 등록</h1>
+</div>
+<br>   <br>  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="id">아이디</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="id"><span id="idspan"></span>
+    </div>
+  </div> 
+  
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="pwd">비밀번호</label>
+    <div class="col-sm-4">
+      <input type="password" class="form-control" name="pwd"><span id="pwdspan"></span>
+    </div>
+  </div>  
+ 
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="pwdc">비밀번호확인</label>
+    <div class="col-sm-4">
+      <input type="password" class="form-control" name="pwdc"><span id="pwdcspan"></span>
+    </div>
+  </div>  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="name">이름</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="name">
+    </div>
+  </div> 
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="nickname">닉네임</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="nickname">
+    </div>
+  </div> 
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="phonenum">휴대전화번호</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="phonenum">
+    </div>
+  </div>
+    
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="email">이메일</label>
+    <div class="col-sm-4">
+      <input type="email" class="form-control" name="email">
+    </div>
+  </div>  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="clp">차량번호</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="clp">
+    </div>
+  </div>  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="usertypeid">UserType</label>
+    <div class="col-sm-4">
+	<select name = "usertypeid" class="form-control form-control-item">
+         <option th:each="ua:${ualist}" 
+          th:if="${ua.utid != 0 }"
+          th:value="${ua.utid}" th:text="${ua.userstypename}">
+          </option>
+    </select>
+    </div>
+  </div>  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="carmodelid">차량모델</label>
+    <div class="col-sm-4">
+      <select name = "carmodelid" class="form-control form-control-item">
+                  <option th:each="cm:${cmlist}" 
+                  th:if="${cm.carmodelid != 0}"
+                  th:value="${cm.carmodelid}" th:text="${cm.mname}">
+                  </option>
+      </select>
+    </div>
+  </div> 
+     
+ <br>  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="add_bt" class="btn btn-success" style="width: 200px;">등록</button>
+    </div>
+  </div>  
+  
+</form>

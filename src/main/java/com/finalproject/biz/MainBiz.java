@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.finalproject.mapper.MainMapper;
+import com.finalproject.vo.CarModelVO;
+import com.finalproject.vo.ChargerVO;
+import com.finalproject.vo.ChartVO;
+import com.finalproject.vo.StationFareVO;
 import com.finalproject.vo.UsersVO;
 
 @Service
@@ -18,15 +22,47 @@ public class MainBiz {
 		return dao.searchcustomer(str);	
 	}
 	
-	public List<UsersVO> searchemployee(String str) throws Exception {
-		return dao.searchmanager(str);	
+	public List<UsersVO> searchadmin(String str) throws Exception {
+		return dao.searchadmin(str);	
+	}
+	
+	public List<CarModelVO> searchev(String str) throws Exception {
+		return dao.searchev(str);	
+	}
+	
+	public List<StationFareVO> searchfare(String str) throws Exception {
+		return dao.searchfare(str);	
+	}
+	
+	public List<ChargerVO> searchcharger(String str) throws Exception {
+		return dao.searchcharger(str);	
 	}
 	
 	public int getCustomerCnt() throws Exception {
 		return dao.getcustomercnt();
 	}
 	
-	public int getManagerCnt() throws Exception {
-		return dao.getmanagercnt();
+	public int getAdminCnt() throws Exception {
+		return dao.getadmincnt();
 	}
+	
+	public int getChargerCnt() throws Exception {
+		return dao.getchargercnt();
+	}
+	
+	public int getCarModelCnt() throws Exception {
+		return dao.getcarmodelcnt();
+	}
+	
+	public int getCommunityCnt() throws Exception {
+		return dao.getcommunitycnt();
+	}
+	
+	public int getStationCnt() throws Exception {
+		return dao.getstationcnt();
+	}
+	
+	public List<ChartVO> getmemberschartdata() throws Exception {
+		return dao.getmemberschartdata();		
+	}	
 }

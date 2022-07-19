@@ -30,15 +30,17 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 관리자 select -->
-	<select id="selectmanager" parameterType="int" resultType="usersVO">
+	<select id="selectadmin" parameterType="int" resultType="usersVO">
 		 SELECT * FROM users WHERE usertypeid=200
 	</select>
 	
-	<!-- 사용자 권한 정보 (차량 모델 추가 예정)select -->
+	<!-- 사용자 권한 정보 select -->
 	<select id="selectcustomerauthoritydetail" parameterType="int" resultType="usersVO">
-		SELECT u.id, u.pwd, u.name, u.nickname, u.phonenum, u.email, u.clp, u.regdate, ua.userstypename as uauserstypename  
+		SELECT u.id, u.pwd, u.name, u.nickname, u.phonenum, u.email, u.clp, u.regdate, 
+		ua.userstypename as uauserstypename, cm.mname as cmmname
 		FROM users u
-		INNER JOIN userauthority ua ON u.usertypeid = ua.uid
+		INNER JOIN userauthority ua ON u.usertypeid = ua.utid
+		INNER JOIN carmodel cm ON u.carmodelid = cm.carmodelid
 		WHERE u.id = #{id}
 	</select>
 	

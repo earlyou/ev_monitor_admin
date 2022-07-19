@@ -1,0 +1,52 @@
+<style>
+	td>img{
+		width: 50px;
+	}
+</style>
+<h1 class="h3 mb-2 text-gray-800">Electric Vehicle Tables</h1>
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>CARMODELID</th>
+                        <th>MNAME</th>
+                        <th>MBRAND</th>
+                        <th>CARIMG</th>
+                        <th>CRANGE</th>
+                        <th>BATTERYSIZE</th>
+                        <th>FPTID</th>
+                        <th>SPTID</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>CARMODELID</th>
+                        <th>MNAME</th>
+                        <th>MBRAND</th>
+                        <th>CARIMG</th>
+                        <th>CRANGE</th>
+                        <th>BATTERYSIZE</th>
+                        <th>FPTID</th>
+                        <th>SPTID</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr th:each="ev:${evlist}">
+                        <td><a th:text="${ev.carmodelid}" th:href="@{detail(carmodelid=${ev.carmodelid})}">carmodelid</a></td>
+                        <td th:text="${ev.mname}">mname</td>
+                        <td th:text="${ev.mbrand}">mbrand</td>
+                        <td><img th:src="@{'/img/'+${ev.carimg}}"></td>
+                        <td th:text="${ev.crange}">crange</td>
+                        <td th:text="${ev.batterysize}">batterysize</td>
+                        <td th:text="${ev.fptid}">fptid</td>
+                        <td th:text="${ev.sptid}">sptid</td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

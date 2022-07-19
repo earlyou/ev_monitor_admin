@@ -1,5 +1,7 @@
 package com.finalproject.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +22,21 @@ public class CarModelVO {
 	private double batterysize;
 	private int fptid;
 	private int sptid;
+	
+	private MultipartFile mf;
+
+	public CarModelVO(int carmodelid, String mname, String mbrand, String carimg, double crange, double batterysize,
+			int fptid, int sptid) {
+		this.carmodelid = carmodelid;
+		this.mname = mname;
+		this.mbrand = mbrand;
+		this.carimg = carimg;
+		this.crange = crange;
+		this.batterysize = batterysize;
+		this.fptid = fptid;
+		this.sptid = sptid;
+	}
+	
+	
 	
 }

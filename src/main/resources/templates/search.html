@@ -1,0 +1,156 @@
+<meta charset="UTF-8">
+<style>
+	td>img{
+		width: 50px;
+	}
+</style>
+<div class="card shadow mb-4" th:unless="${#lists.isEmpty(mlist)}">     
+<br>  
+  <h2 class="h3 mb-2 text-gray-800" style="text-align:center;" th:if="${usertypeid==100}">고객 검색 결과</h2>
+  <h2 class="h3 mb-2 text-gray-800" style="text-align:center;" th:if="${usertypeid==200}">직원 검색 결과</h2>
+<div class="card-body">
+ <div class="table-responsive">       
+  <table class="table table-bordered" width="100%" cellspacing="0">
+    <thead>
+      <tr>
+          <th>아이디</th>
+          <th>비밀번호</th>
+          <th>이름</th>
+          <th>닉네임</th>
+          <th>휴대전화번호</th>
+          <th>이메일</th>
+          <th>차량번호</th>
+          <th>등록일자</th>
+          <th>차량모델번호</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="m:${mlist}">
+        <td><a href="" th:text="${m.id}" th:href="@{/mb/detail(id=${m.id})}"></a></td>
+        <td th:text="${m.pwd}"></td>
+        <td th:text="${m.name}"></td>
+        <td th:text="${m.nickname}"></td>
+        <td th:text="${m.phonenum}"></td>
+        <td th:text="${m.email}"></td>
+        <td th:text="${m.clp}"></td>
+        <td th:text="${#dates.format(m.regdate,'yyyy-MM-dd')}"></td>
+        <td th:text="${m.carmodelid}"></td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+    </div>
+</div>
+
+
+<div class="card shadow mb-4" th:unless="${#lists.isEmpty(evlist)}">     
+<br>  
+  <h2 class="h3 mb-2 text-gray-800" style="text-align:center;">차량 검색 결과</h2>
+<div class="card-body">
+ <div class="table-responsive">       
+  <table class="table table-bordered" width="100%" cellspacing="0">
+    <thead>
+      <tr>
+          <th>차량모델ID</th>
+          <th>모델명</th>
+          <th>제조사명</th>
+          <th>차량이미지</th>
+          <th>주행가능거리</th>
+          <th>차량배터리용량</th>
+          <th>급속충전기ID</th>
+          <th>완전충전핀ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="ev:${evlist}">
+        <td><a href="" th:text="${ev.carmodelid}" th:href="@{/vm/detail(carmodelid=${ev.carmodelid})}"></a></td>
+        <td th:text="${ev.mname}"></td>
+        <td th:text="${ev.mbrand}"></td>
+        <td><img th:src="@{'/img/'+${ev.carimg}}"></td>
+        <td th:text="${ev.crange}"></td>
+        <td th:text="${ev.batterysize}"></td>
+        <td th:text="${ev.fptid}"></td>
+        <td th:text="${ev.sptid}"></td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+    </div>
+</div>
+
+<div class="card shadow mb-4" th:unless="${#lists.isEmpty(sflist)}">     
+<br>  
+  <h2 class="h3 mb-2 text-gray-800" style="text-align:center;">충전요금 검색 결과</h2>
+<div class="card-body">
+ <div class="table-responsive">       
+  <table class="table table-bordered" width="100%" cellspacing="0">
+    <thead>
+      <tr>
+          <th>충전요금ID</th>
+          <th>충전사업자ID</th>
+          <th>충전사업자명</th>
+          <th>충전속도</th>
+          <th>회원</th>
+          <th>공공주택</th>
+          <th>충전 시간대</th>
+          <th>계절</th>
+          <th>충전요금</th>
+      </tr>
+    </thead>
+    <tbody>
+       <tr th:each="sf:${sflist}">
+          <td><a th:text="${sf.cid}" th:href="@{detail(cid=${sf.cid})}"></a></td>
+          <td th:text="${sf.busiId}"></td>
+          <td th:text="${sf.bnm}"></td>
+          <td th:text="${sf.cs}"></td>
+          <td th:text="${sf.memYN}"></td>
+          <td th:text="${sf.apartYN}"></td>
+          <td th:text="${sf.time}"></td>
+          <td th:text="${sf.seasons}"></td>
+          <td th:text="${sf.cf}"></td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+    </div>
+</div>
+
+<div class="card shadow mb-4" th:unless="${#lists.isEmpty(ctlist)}">     
+<br>  
+  <h2 class="h3 mb-2 text-gray-800" style="text-align:center;">충전기 검색 결과</h2>
+<div class="card-body">
+ <div class="table-responsive">       
+  <table class="table table-bordered" width="100%" cellspacing="0">
+    <thead>
+      <tr>
+          <th>충전핀ID</th>
+          <th>충전기명</th>
+          <th>충전기이미지</th>
+          <th>충전전류</th>
+          <th>충전전압</th>
+          <th>충전전력</th>
+          <th>충전레벨</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ct:${ctlist}">
+       <td><a th:text="${ct.ptid}" th:href="@{detail(ptid=${ct.ptid})}"></a></td>
+       <td th:text="${ct.chgernm}"></td>
+       <td><img th:src="@{'/img/'+${ct.pinimg}}"></td>
+       <td th:text="${ct.ec}"></td>
+       <td th:text="${ct.vol}"></td>
+       <td th:text="${ct.power}"></td>
+       <td th:text="${ct.clevel}"></td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+    </div>
+</div>
+
+
+
+<div class="container col-sm-10" th:if="${#lists.isEmpty(evlist)} and ${#lists.isEmpty(mlist)} and ${#lists.isEmpty(sflist)} and ${#lists.isEmpty(ctlist)}" >     
+<br> <br> 
+	<h2 class="text-center">검색 결과를 찾을수 없습니다.</h2> 
+</div>
