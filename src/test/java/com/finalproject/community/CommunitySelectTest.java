@@ -8,22 +8,22 @@ import com.finalproject.biz.CommunityBiz;
 import com.finalproject.vo.CommunityVO;
 
 @SpringBootTest
-public class CommunitySelectTest {
-
+class CommunitySelectTest {
+	
 	@Autowired
-	CommunityBiz commubiz;
+	CommunityBiz cmbiz;
 	
 	@Test
 	void contextLoads() {
-		CommunityVO cv = null;
-		try {
-			cv = commubiz.get(3);
-			System.out.println(cv);
-		} catch (Exception e) {
+		CommunityVO review = null;
 		
+		try {
+			review = cmbiz.get(2);
+			System.out.println(review);
+		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
-	
 	}
-	
+
 }

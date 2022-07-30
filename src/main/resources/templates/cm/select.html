@@ -1,0 +1,47 @@
+<style>
+	td>img{
+		width: 50px;
+	}
+</style>
+<meta charset="utf-8">
+<h1 class="h3 mb-2 text-gray-800">Community Tables</h1>
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>포스트ID</th>
+                        <th>사용자ID</th>
+                        <th>충전소ID</th>
+                        <th>내용</th>
+                        <th>이미지</th>
+                        <th>작성일</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>포스트ID</th>
+                        <th>사용자ID</th>
+                        <th>충전소ID</th>
+                        <th>내용</th>
+                        <th>이미지</th>
+                        <th>작성일</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr th:each="com:${comlist}">
+                        <td><a th:text="${com.pid}" th:href="@{detail(pid=${com.pid})}">pid</a></td>
+                        <td th:text="${com.uid}">uid</td>
+                        <td th:text="${com.statid}">statid</td>
+                        <td th:text="${com.tf}">tf</td>
+                        <td th:text="@{'/img/'+${com.cimgname}}">cimgname</td>
+                        <td th:text="${#dates.format(com.regdate,'yyyy-MM-dd')}">regdate</td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

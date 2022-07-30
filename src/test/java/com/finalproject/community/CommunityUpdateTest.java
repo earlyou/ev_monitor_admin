@@ -8,21 +8,20 @@ import com.finalproject.biz.CommunityBiz;
 import com.finalproject.vo.CommunityVO;
 
 @SpringBootTest
-public class CommunityUpdateTest {
-
+class CommunityUpdateTest {
+	
 	@Autowired
-	CommunityBiz commubiz;
+	CommunityBiz cmbiz;
 	
 	@Test
 	void contextLoads() {
+		CommunityVO obj = new CommunityVO(3, "id05", "ME000017", "충전기 추가 배치, 정보 상이", "cimgname3",null);
 		
-		//text=#{tf}, cimgname=#{cimgname},statnm=#{statnm} WHERE pid=#{pid}
-		CommunityVO obj = new CommunityVO("테스트텍스트","테스트이미지","종묘공영주차장2");
 		try {
-			commubiz.modify(obj);
-			System.out.println("Updated OK");
-		} catch (Exception e) {			
+			cmbiz.modify(obj);			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 }
