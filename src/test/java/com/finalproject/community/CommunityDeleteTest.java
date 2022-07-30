@@ -5,20 +5,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.finalproject.biz.CommunityBiz;
+import com.finalproject.biz.UsersBiz;
 
 @SpringBootTest
-public class CommunityDelelteTest {
-@Autowired
-CommunityBiz commubiz;
-
-@Test
-void contextLoads() {
-	try {
-		commubiz.remove(2);
-		System.out.println("delete ok");
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
+class CommunityDeleteTest {
 	
-}
+	@Autowired
+	CommunityBiz cmbiz;
+	
+	@Test
+	void contextLoads() {
+		try {
+			cmbiz.remove(3);
+			System.out.println("Delete OK");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

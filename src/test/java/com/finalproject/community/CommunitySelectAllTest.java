@@ -10,23 +10,22 @@ import com.finalproject.biz.CommunityBiz;
 import com.finalproject.vo.CommunityVO;
 
 @SpringBootTest
-public class CommunitySelectAllTest {
-
+class CommunitySelectAllTest {
+	
 	@Autowired
-	CommunityBiz commubiz;
+	CommunityBiz cmbiz;
 	
 	@Test
 	void contextLoads() {
-		List<CommunityVO> list = null;
+		List<CommunityVO> list = null;		
 		try {
-			list = commubiz.get();
+			list = cmbiz.get();			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		for (CommunityVO obj : list) {
 			System.out.println(obj);
 		}
-	
 	}
-	
+
 }
