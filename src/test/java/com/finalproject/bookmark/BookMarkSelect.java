@@ -19,7 +19,7 @@ class BookMarkSelect {
 		BookMarkVO bmu = null;
 		
 		try {
-			bmu = bbiz.get(3);
+			bmu = bbiz.get(1);
 			System.out.println(bmu);
 		} catch (Exception e) {
 			
