@@ -15,7 +15,7 @@ class BookMarkDelete {
 	@Test
 	void contextLoads() {
 		try {
-			bbiz.remove(4);
+			bbiz.remove(1);
 			System.out.println("Delete OK");
 		} catch (Exception e) {
 			e.printStackTrace();

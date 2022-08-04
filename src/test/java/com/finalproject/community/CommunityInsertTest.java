@@ -1,7 +1,5 @@
 package com.finalproject.community;
 
-import java.util.Date;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,25 +8,19 @@ import com.finalproject.biz.CommunityBiz;
 import com.finalproject.vo.CommunityVO;
 
 @SpringBootTest
-public class CommunityInsertTest {
+class CommunityInsertTest {
 
 	@Autowired
-	CommunityBiz commubiz;
+	CommunityBiz cmbiz;
 	
 	@Test
 	void contextLoads() {
-		
-// int pid, String uid, int statId, String tf, String cimgname,sysdate() int zcode, String statnm
-		CommunityVO cv = new CommunityVO(60,"id10",55,"테스트","img",null,11,"세종로공영주차장2");
+		CommunityVO review = new CommunityVO(4, "id02", "ME000025", "충전기 추가 필요","cimgname4", null);		
 		try {
-			commubiz.register(cv);
-			System.out.println("register Ok");
+			cmbiz.register(review);
+			System.out.println("Register OK");
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
-	
 	}
-
-
 }
