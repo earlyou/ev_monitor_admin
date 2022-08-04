@@ -1,0 +1,61 @@
+<script>
+	$(function(){
+		$('#btn_newpost').click(function(){	
+			$('input[name="location"]').val($.trim($('input[name="location"]').val()));
+			
+			$('#form_newpost').attr({
+				'enctype':'multipart/form-data',
+				'method':'post',
+				'action':'addimpl'
+			});
+			$('#form_newpost').submit();
+            alert 
+		});
+	});
+</script>
+
+<section class="ftco-section contact-section bg-light">
+  <div class="container">
+  
+    <div class="row block-9">
+      <div class="col-md-6 order-md-last d-flex">
+	     <form class="bg-white p-5 contact-form" id="form_newpost">
+	        <h2 class="mb-4">글작성</h2>
+	          <div class="form-group">
+	          	<label>제목 </label>
+	            <input type="text" name="title" class="form-control">
+	          </div>
+	          <div class="form-group">
+	            <input type="hidden" name="uid" class="form-control" th:value="${session.logincust.id}">
+	          </div>
+	          <div class="form-group">
+	          	<label>카테고리 </label>
+	            <select name="type">
+	            	<option value="고장제보">고장제보</option>
+	            	<option value="후기">후기</option>
+	            	<option value="잡담">잡담</option>
+	            </select>
+	            <label>충전소이름 </label>
+	            <input type="text" name="statnm">
+	          </div>
+			  <div class="form-group">
+			  	 <label>내용 </label>
+	             <textarea name="content" cols="15" rows="15" class="form-control"></textarea>          
+	          </div>
+	          <div class="form-group">
+	          	<label>첨부파일 </label>
+	          	<input type="file" name="mf" class="form-control">
+	          </div>
+	          <div class="form-group">
+	            <input type="submit" value="등록" id="btn_newpost" class="btn btn-primary py-3 px-5" onclick="alert('작성글이 등록되었습니다.')">
+	          </div>
+        </form>
+      
+      </div>
+
+    </div>
+  </div>
+  
+ 
+  
+</section>
