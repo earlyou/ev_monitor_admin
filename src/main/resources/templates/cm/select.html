@@ -16,9 +16,11 @@
                         <th>포스트ID</th>
                         <th>사용자ID</th>
                         <th>충전소ID</th>
-                        <th>내용</th>
+                        <th>지역</th>
+                        <th>제목</th>
+                        <th>글 내용</th>
                         <th>이미지</th>
-                        <th>작성일</th>
+                        <th>등록일</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -26,9 +28,11 @@
                         <th>포스트ID</th>
                         <th>사용자ID</th>
                         <th>충전소ID</th>
-                        <th>내용</th>
+                        <th>지역</th>
+                        <th>제목</th>
+                        <th>글 내용</th>
                         <th>이미지</th>
-                        <th>작성일</th>
+                        <th>등록일</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -36,9 +40,11 @@
                         <td><a th:text="${com.pid}" th:href="@{detail(pid=${com.pid})}">pid</a></td>
                         <td th:text="${com.uid}">uid</td>
                         <td th:text="${com.statid}">statid</td>
+                        <td th:text="${com.location}">location</td>
+                        <td th:text="${com.title}">title</td>
                         <td th:text="${com.tf}">tf</td>
                         <td th:text="@{'/img/'+${com.cimgname}}">cimgname</td>
-                        <td th:text="${#dates.format(com.regdate,'yyyy-MM-dd')}">regdate</td>
+                        <td th:text="${#dates.format(com.regdate,'yyyy-MM-dd hh:mm:ss')}">regdate</td>
                     </tr> 
                 </tbody>
             </table>

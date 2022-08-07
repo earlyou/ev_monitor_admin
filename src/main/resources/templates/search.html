@@ -148,9 +148,43 @@
     </div>
 </div>
 
+<div class="card shadow mb-4" th:unless="${#lists.isEmpty(cmlist)}">     
+<br>  
+  <h2 class="h3 mb-2 text-gray-800" style="text-align:center;">커뮤니티 검색 결과</h2>
+<div class="card-body">
+ <div class="table-responsive">       
+  <table class="table table-bordered" width="100%" cellspacing="0">
+    <thead>
+      <tr>
+          <th>포스트ID</th>
+          <th>사용자ID</th>
+          <th>충전소ID</th>
+          <th>지역</th>
+          <th>제목</th>
+          <th>글 내용</th>
+          <th>이미지</th>
+          <th>등록일</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cm:${cmlist}">
+       <td><a th:text="${cm.pid}" th:href="@{detail(pid=${cm.pid})}"></a></td>
+       <td th:text="${cm.uid}"></td>
+       <td th:text="${cm.statid}"></td>
+       <td th:text="${cm.location}"></td>
+       <td th:text="${cm.title}"></td>
+       <td th:text="${cm.tf}"></td>
+       <td><img th:src="@{'/img/'+${cm.cimgname}}"></td>
+       <td th:text="${#dates.format(cm.regdate,'yyyy-MM-dd hh:mm:ss')}"></td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+    </div>
+</div>
 
 
-<div class="container col-sm-10" th:if="${#lists.isEmpty(evlist)} and ${#lists.isEmpty(mlist)} and ${#lists.isEmpty(sflist)} and ${#lists.isEmpty(ctlist)}" >     
+<div class="container col-sm-10" th:if="${#lists.isEmpty(evlist)} and ${#lists.isEmpty(mlist)} and ${#lists.isEmpty(sflist)} and ${#lists.isEmpty(ctlist)} and ${#lists.isEmpty(cmlist)}" >     
 <br> <br> 
 	<h2 class="text-center">검색 결과를 찾을수 없습니다.</h2> 
 </div>

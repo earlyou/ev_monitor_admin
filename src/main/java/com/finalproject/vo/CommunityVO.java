@@ -17,6 +17,7 @@ import lombok.ToString;
 public class CommunityVO  {
 	private int pid;
 	private String uid;
+	private String statid;
 	private String location;
 	private String title;
 	private String tf;

@@ -15,7 +15,7 @@ class CommunityUpdateTest {
 	
 	@Test
 	void contextLoads() {
-		CommunityVO obj = new CommunityVO(3, "id05", "ME000017", "충전기 추가 배치, 정보 상이", "cimgname3",null);
+		CommunityVO obj = new CommunityVO(5, "id02", "ME000016", "서울특별시 성북구", "충전기 추가 배치 정보 상이", "시설이 깨끗하네요.", "cimgname4", null);
 		
 		try {
 			cmbiz.modify(obj);			

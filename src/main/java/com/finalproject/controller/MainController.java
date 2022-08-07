@@ -14,6 +14,7 @@ import com.finalproject.biz.MainBiz;
 import com.finalproject.biz.UsersBiz;
 import com.finalproject.vo.CarModelVO;
 import com.finalproject.vo.ChargerVO;
+import com.finalproject.vo.CommunityVO;
 import com.finalproject.vo.StationFareVO;
 import com.finalproject.vo.UsersVO;
 
@@ -111,6 +112,7 @@ public class MainController {
 	List<CarModelVO> evlist = null;
 	List<StationFareVO> sflist = null;
 	List<ChargerVO> ctlist = null;
+	List<CommunityVO> cmlist = null;
 	
 	switch(srchselect){
 	case "stationfare" :	
@@ -139,6 +141,15 @@ public class MainController {
 			e.printStackTrace();
 		}
 		break;
+
+	case "communityuid" :	
+		try {
+			cmlist = biz.searchcommunityuid(srchtext);
+			m.addAttribute("cmlist", cmlist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		break;		
 		
 	case "customer" :
 		try {

@@ -42,13 +42,23 @@ $(document).ready(function(){
             
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                    name="uid" th:value="${comp.statid}" readonly="readonly">
+                    name="statid" th:value="${comp.statid}" readonly="readonly">
             </div>
             
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                    name="uid" th:value="${comp.tf}" readonly="readonly">
+                    name="location" th:value="${comp.location}" readonly="readonly">
             </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                    name="title" th:value="${comp.title}" readonly="readonly">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                    name="tf" th:value="${comp.tf}" readonly="readonly">
+            </div>       
             
             <div class="form-group">
             	<img th:src="@{'/img/'+${comp.cimgname}}">
@@ -59,7 +69,7 @@ $(document).ready(function(){
                        
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                    name="regdate" th:value="${#dates.format(comp.regdate,'yyyy/MM/dd')}" readonly="readonly">
+                    name="regdate" th:value="${#dates.format(comp.regdate,'yyyy/MM/dd hh:mm:ss')}" readonly="readonly">
             </div>
                             
                                       	

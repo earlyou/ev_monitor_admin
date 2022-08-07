@@ -18,7 +18,7 @@ class CommunitySelectTest {
 		CommunityVO review = null;
 		
 		try {
-			review = cmbiz.get(2);
+			review = cmbiz.get(5);
 			System.out.println(review);
 		} catch (Exception e) {
 			

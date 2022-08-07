@@ -44,4 +44,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE u.id = #{id}
 	</select>
 	
+	<select id="clpselect" parameterType="String" resultType="usersVO">
+		SELECT clp FROM users WHERE clp = #{clp}
+	</select>
+	
 </mapper>

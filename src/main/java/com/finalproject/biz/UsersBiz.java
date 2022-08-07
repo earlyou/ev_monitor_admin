@@ -52,6 +52,9 @@ public class UsersBiz implements Biz<String, UsersVO>{
 		return udao.selectcustomerauthoritydetail();
 	}
 	
+	public UsersVO clpget(String k) throws Exception {
+		return udao.clpselect(k);
+	}
 
 	
 }
