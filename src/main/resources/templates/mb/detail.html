@@ -1,8 +1,163 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/udbt.css" /> 
-<script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>    
+<script th:inline="javascript">
+var pwdok=0, nameok=0, phonenumok=0, nicknameok=0, emailok = 0;
+
+function sendClp(clp){
+	$.ajax({
+		url:'/checkclp',
+		data:{'clp':clp},
+		success:function(dataclp){
+			if(dataclp == '1'){
+				$('#cclpspan').text('이미 있는 번호판입니다.');
+			}else{
+				$('#cclpspan').text('사용 가능한 번호판입니다.');
+			}
+		}
+	});
+}
+
+function checkPwd(password) {
+    
+	var pwd = password;
+    
+    var cd1, cd2, cd3; 
+    
+    let number = pwd.search(/[0-9]/g);// 숫자 찾기 
+    let english = pwd.search(/[a-z]/ig);//영문자 찾기 
+    let spece = pwd.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);//특수문자 찾기 
+    let reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$/;//비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함
+    
+    // 자리수 확인 
+    if (pwd.length < 4 || pwd.length > 10) {
+		$('#pwd_cd_1').text('5자리 ~ 10자리 이내로 입력해주세요.');
+		$('#pwd_cd_1').css('color','red');
+		cd1 = false;
+
+    } else {
+		$('#pwd_cd_1').text('충족');
+		$('#pwd_cd_1').css('color','blue');
+		cd1 = true;
+    }
+    
+    // 공백 확인 
+    if (pwd.search(/\s/) != -1) {
+		$('#pwd_cd_2').text('비밀번호는 공백 없이 입력해주세요.');
+		$('#pwd_cd_2').css('color','red');
+		cd2 = false;
+		
+    } else {
+		$('#pwd_cd_2').text('충족');
+		$('#pwd_cd_2').css('color','blue');
+		cd2 = true;
+    }
+    
+    // 영문, 숫자, 특수문자 확인 
+   	if (number < 0 || english < 0 || spece < 0) {
+		$('#pwd_cd_3').text('영문,숫자,특수문자를 혼합하여 입력해주세요.');
+		$('#pwd_cd_3').css('color','red');
+		cd3 = false;
+    }else{
+		$('#pwd_cd_3').text('충족');
+		$('#pwd_cd_3').css('color','blue');
+		cd3 = true;
+    }
+    
+    if(cd1 && cd2 && cd3){// 모든 조건 만족시 실행 
+    	$('#pwdspan').text('사용할 수 있는 password 입니다. ');
+    	$('#pwdspan').css('color','blue');
+    	pwdok=1;
+    }else{
+    	pwdok=0;
+    }
+
+    
+};
+
 $(document).ready(function(){
+	
+	$('#pwdinfo').hide();
+	
+	$('#name').blur(function(){ // 이름
+		name = $(this).val();
+		if(name == null || name==''){
+			$('#nspan').text('이름을 입력해 주세요.');
+			$('#nspan').css('color','red');
+			nameok = 0;
+		}else{
+			$('#nspan').text('사용 가능한 이름입니다.');
+			$('#nspan').css('color','blue');
+			nameok = 1;
+		}
+		
+	});
+	
+	$('#nickname').blur(function(){ // 닉네임
+		nickname = $(this).val();
+		if(nickname == null || nickname ==''){
+			$('#nickspan').text('닉네임을 입력해 주세요.');
+			$('#nickspan').css('color','red');
+			nicknameok = 0;
+		}else{
+			$('#nickspan').text('사용 가능한 닉네임입니다.');
+			$('#nickspan').css('color','blue');
+			nicknameok = 1;
+		}
+		
+	});
+	
+	$('#phonenum').blur(function(){// 핸드폰 번호 벗어나면 실행 
+		
+		phonenum = $(this).val();
+
+		if(phonenum.match(/\d{3}-\d{4}-\d{4}/g) == null){//null이면 조건에 맞지 않는것
+			$('#pnspan').text('전화번호 형식에 맞지 않습니다. 010-0000-0000 형식으로 작성하세요.');
+			$('#pnspan').css('color','red');
+			phonenumok = 0;
+		}else{
+			$('#pnspan').text('사용 가능한 전화번호 형식입니다. ');
+			$('#pnspan').css('color','blue');
+			phonenumok = 1;
+		}
+	});
+	
+	$('#email').blur(function(){// 핸드폰 번호 벗어나면 실행 
+		
+		email = $(this).val();
+
+		if(email.match(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i) == null){//null이면 조건에 맞지 않는것
+			$('#emspan').text('이메일 형식에 맞지 않습니다.  you@example.com 형식으로 작성하세요.');
+			$('#emspan').css('color','red');
+			emailok = 0;
+		}else{
+			$('#emspan').text('사용 가능한 이메일 형식입니다. ');
+			$('#emspan').css('color','blue');
+			emailok = 1;
+		}
+	});
+
+	$('#pwd').focus(function() {	
+		
+		$('#pwdinfo').show();
+		
+		$('#pwd').keyup(function(){
+			var pwd = $(this).val();
+			checkPwd(pwd);	
+		});
+	});
+	
+	$('#pwd').blur(function() { 
+		$('#pwdinfo').hide();
+
+	});
+	
+	$('input[name="clp"]').keyup(function(){
+		var clp = $(this).val(); 		
+		sendClp(clp);
+	});	
+	
 	$('#deletebtn').click(function(){
 		var id = $('input[name="id"]').val();
 		var c = confirm('삭제 하시겠습니까?');
@@ -13,64 +168,100 @@ $(document).ready(function(){
 	});
 	
 	$('#updatebtn').click(function(){
-		$('.user').attr({
-			'method':'post',
-			'action':'update'
-		});
-		$('.user').submit();
+		
+		if($('#pwd').val() == '' ){
+			$('#pwdspan').text('비밀번호는 공백이 될 수 없습니다. ');
+			$('#pwdspan').css('color','red');
+			$('#pwd').focus();
+		}
+		if($('#name').val() == '' ){// id값이 공백일 경우
+			$('#nspan').text('이름은 공백이 될 수 없습니다. ');
+			$('#nspan').css('color','red');
+			$('#name').focus();
+		}
+		if ($('#phonenum').val() == '' ) {//pwd 값이 공백일 경우 
+			$('#pnspan').text('핸드폰번호는 공백이 될 수 없습니다.');	
+			$('#pnspan').css('color','red');	
+			$('#phonenum').focus();
+		}
+		if ($('#nickname').val() == '' ) {//pwd 값이 공백일 경우 
+			$('#nickspan').text('닉네임은 공백이 될 수 없습니다.');	
+			$('#nickspan').css('color','red');	
+			$('#nickname').focus();
+		}
+		if($('#email').val() == ''){
+			$('#emspan').text('이메일은 필수 입력 요소 입니다. ');
+			$('#emspan').css('color','red');
+			$('#email').focus();
+		}else{	
+			$('#user_form').attr({
+				'method':'post',
+				'action':'updateimpl'	
+			});
+			$('#user_form').submit();
+			alert('업데이트가 완료되었습니다.');
+		// 현재 &&이 먹히지 않아, span 메시지로만 처리합니다.
+		}	
 	});
 });
 
 </script>
 
+<form class="form-horizontal" id="user_form">
 <div class="col-lg-6">
 
         <div class="form-group">
     		<h1 class="h2 text-gray-700 mb-25 text-center">고객 정보 상세</h1>
 		</div>
-        <form class="user">
+  
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                    name="id" th:value="${members.id}" readonly="readonly">
+                    name="id" id="id" th:value="${members.id}" readonly="readonly">
             </div>
             
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                    name="pwd"  th:value="${members.pwd}">
+                    name="pwd" id="pwd" th:value="${members.pwd}">
+             	<div id="pwdinfo">
+					<div><li><span id="pwd_cd_1">5자 이상</span></div>
+					<div><li><span id="pwd_cd_2">비밀번호는 공백 없이 입력해주세요.</span></div>
+					<div><li><span id="pwd_cd_3">영문,숫자,특수문자를 혼합하여 입력해주세요.</span></div>
+				</div>	
+			<div><span id="pwdspan"></span></div>
             </div>
             
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                    name="name"  th:value="${members.name}">
+                    name="name" id="name" th:value="${members.name}"><span id="nspan"></span> 
             </div>
            
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                    name="nickname" th:value="${members.nickname}">
+                    name="nickname" id="nickname" th:value="${members.nickname}"><span id="nickspan"></span>
             </div>
             
             <div class="form-group">
-                <input type="text" class="form-control form-control-user"
-                    name="phonenum" th:value="${members.phonenum}">
+                <input type="text" class="form-control form-control-user" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required maxlength="13"
+                    name="phonenum" id="phonenum" th:value="${members.phonenum}"><span id="pnspan"></span>
             </div>
  
              <div class="form-group">
                 <input type="email" class="form-control form-control-user"
-                    name="email" th:value="${members.email}">
+                    name="email" id="email" th:value="${members.email}"><span id="emspan"></span> 
             </div>
             
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                    name="clp" th:value="${members.clp}">
+                    name="clp" id="clp" th:value="${members.clp}"><span id="cclpspan"></span>
             </div>         
                        
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                    name="regdate" th:value="${#dates.format(members.regdate,'yyyy/MM/dd')}" readonly="readonly">
+                    name="regdate" id="regdate" th:value="${#dates.format(members.regdate,'yyyy/MM/dd')}" readonly="readonly">
             </div>
             
               <div class="form-group">
-                 <select name="usertypeid" class="form-control form-control-item">
+                 <select name="usertypeid" id="usertypeid" class="form-control form-control-item">
                  	<option th:each="ua:${ualist}" 
                  	th:if="${ua.utid != 0 }" 
                  	th:value="${ua.utid}" 
@@ -81,7 +272,7 @@ $(document).ready(function(){
               </div>
               
               <div class="form-group">
-                 <select name="carmodelid" class="form-control form-control-item">
+                 <select name="carmodelid" id="carmodelid" class="form-control form-control-item">
                  	<option th:each="cm:${cmlist}" 
                  	th:if="${cm.carmodelid != 0}"
                  	th:value="${cm.carmodelid}" 
@@ -94,7 +285,5 @@ $(document).ready(function(){
          	<a id="updatebtn" href="#">업데이트</a>
             <a id="deletebtn" href="#">삭제</a>   
             
-        </form>
-        
-
 </div>
+  </form>

@@ -1,23 +1,27 @@
-package com.finalproject.community;
+package com.finalproject.users;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.finalproject.biz.CommunityBiz;
+import com.finalproject.biz.UsersBiz;
+import com.finalproject.vo.UsersVO;
 
 @SpringBootTest
-class CommunityDeleteTest {
+class UsersCarSelectTest {
 	
 	@Autowired
-	CommunityBiz cmbiz;
+	UsersBiz ubiz;
 	
 	@Test
 	void contextLoads() {
+		UsersVO users = null;
+		
 		try {
-			cmbiz.remove(5);
-			System.out.println("Delete OK");
+			users = ubiz.clpget("27아 5134");
+			System.out.println(users);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 	}

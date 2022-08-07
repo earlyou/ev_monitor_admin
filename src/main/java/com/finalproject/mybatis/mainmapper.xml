@@ -21,16 +21,18 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
    
    <!-- 충전요금 검색 -->
     <select id="searchfare" parameterType="String" resultType="StationFareVO">
-     	SELECT * FROM stationfare WHERE bnm LIKE CONCAT('%',#{srchtext},'%');
+     	SELECT * FROM stationfare WHERE bnm LIKE CONCAT('%',#{srchtext},'%')
     </select>
    
    <!-- 충전기 검색 -->
     <select id="searchcharger" parameterType="String" resultType="ChargerVO">
-     	SELECT * FROM charger WHERE chgernm LIKE CONCAT('%', #{srchtext},'%');
+     	SELECT * FROM charger WHERE chgernm LIKE CONCAT('%', #{srchtext},'%')
     </select>
    
-   <!-- 커뮤니티 검색 -->
-   
+   <!-- 커뮤니티 검색 아이디 검색 -->
+    <select id="searchcommunityuid" parameterType="String" resultType="CommunityVO">
+     	SELECT * FROM community WHERE uid LIKE CONCAT('%', #{srchtext},'%')
+    </select>   
 
     <!-- 일반회원 인원 수 select -->
 	<select id="getcustomercnt" resultType="int">

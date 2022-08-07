@@ -9,6 +9,7 @@ import com.finalproject.mapper.MainMapper;
 import com.finalproject.vo.CarModelVO;
 import com.finalproject.vo.ChargerVO;
 import com.finalproject.vo.ChartVO;
+import com.finalproject.vo.CommunityVO;
 import com.finalproject.vo.StationFareVO;
 import com.finalproject.vo.UsersVO;
 
@@ -36,6 +37,10 @@ public class MainBiz {
 	
 	public List<ChargerVO> searchcharger(String str) throws Exception {
 		return dao.searchcharger(str);	
+	}
+	
+	public List<CommunityVO> searchcommunityuid(String str) throws Exception {
+		return dao.searchcommunityuid(str);	
 	}
 	
 	public int getCustomerCnt() throws Exception {

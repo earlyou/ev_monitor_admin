@@ -44,7 +44,7 @@ public class UsersController {
 		return "main";
 	}
 	
-	@RequestMapping("addimpl")
+	@RequestMapping("/addimpl")
 	public String addimpl(Model m, UsersVO obj) {
 		
 		try {
@@ -89,11 +89,14 @@ public class UsersController {
 		return "main";
 	}
 	
-	@RequestMapping("/update")
-	public String update(Model m, UsersVO obj) {
+	@RequestMapping("/updateimpl")
+	public String updateimpl(Model m, UsersVO obj) {
 		
+		System.out.println(obj);
 		try {
+			System.out.println(obj);
 			ubiz.modify(obj);
+			
 		} catch (Exception e) {		
 			e.printStackTrace();
 		}
