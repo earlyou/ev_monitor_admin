@@ -1,0 +1,174 @@
+<meta charset="UTF-8">
+<style>
+#formdiv{
+	margin: 80px;
+}
+</style>
+<script>
+    $(function(){
+        $('#btn_newpost').click(function(){	
+                    
+            $('#form_newpost').attr({
+                'enctype':'multipart/form-data',
+                'method':'post',
+                'action':'addimpl'
+            });
+            $('#form_newpost').submit();
+        });
+    });
+</script>
+
+	<!-- bradcam_area  -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h1 class="h2 text-gray-700 mb-25 text-center">커뮤니티 신규게시글 등록</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+   <!--form area   --> 
+    <div id="formdiv">
+    <div class="col-lg-8 col-md-8">
+	<h3 class="mb-30" >글작성_관리자</h3>
+	<form action="#">
+		<div class="mt-10">
+			<input type="text" name="cm.title" placeholder="글제목"
+				onfocus="this.placeholder = ''" onblur="this.placeholder = '글제목'" required
+				class="single-input">
+		</div>
+		<div class="mt-10">
+			<input type="text" name="last_name" placeholder="Last Name"
+				onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required
+				class="single-input">
+		</div>
+		<div class="mt-10">
+			<input type="text" name="last_name" placeholder="Last Name"
+				onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required
+				class="single-input">
+		</div>
+		<div class="mt-10">
+			<input type="email" name="EMAIL" placeholder="Email address"
+				onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required
+				class="single-input">
+		</div>
+		<div class="input-group-icon mt-10">
+			<div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
+			<input type="text" name="address" placeholder="Address" onfocus="this.placeholder = ''"
+				onblur="this.placeholder = 'Address'" required class="single-input">
+		</div>
+		<div class="input-group-icon mt-10">
+			<div class="form-select" id="default-select">
+				<select>
+				<option value=" 1">City</option>
+				<option value="1">Dhaka</option>
+				<option value="1">Dilli</option>
+				<option value="1">Newyork</option>
+				<option value="1">Islamabad</option>
+				</select>
+			</div>
+		</div>
+		<div class="input-group-icon mt-10">
+			<div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+			<div class="form-select" id="default-select">
+				<select>
+				<option value=" 1">Country</option>
+				<option value="1">Bangladesh</option>
+				<option value="1">India</option>
+				<option value="1">England</option>
+				<option value="1">Srilanka</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="mt-10">
+			<textarea class="single-textarea" placeholder="cm.textfield" onfocus="this.placeholder = ''"
+				onblur="this.placeholder = 'cm.textfield'" required></textarea>
+		</div>
+		
+	</form>
+	</div>
+	</div> 
+	
+ <!--<div class="container">
+  
+ <div class="row block-9">
+      <div class="col-md-6 order-md-last d-flex">
+         <form class="bg-white p-5 contact-form" id="form_newpost">
+            <h2 class="mb-4">글쓰기</h2>
+            <label for="sel3">지역구</label>
+            <select id="sel3" name="gu">
+                <optgroup label="선택안함">
+                    <option text>선택안함</option>
+                </optgroup>
+                <optgroup label="ㄱ">
+                    <option text>강남구</option>
+                    <option text>강동구</option>
+                    <option text>강북구</option>
+                    <option text>강서구</option>
+                    <option text>관악구</option>
+                    <option text>광진구</option>
+                    <option text>구로구</option>
+                    <option text>금천구</option>
+                </optgroup>
+                <optgroup label="ㄴ">    
+                    <option text>노원구</option>
+                </optgroup>
+                <optgroup label="ㄷ">    
+                    <option text>도봉구</option>
+                    <option text>동대문구</option>
+                    <option text>동작구</option>
+                </optgroup>
+                <optgroup label="ㅁ">
+                    <option text=>마포구</option>
+                </optgroup>
+                <optgroup label="ㅅ">
+                    <option text=>서대문구</option>
+                    <option text>서초구</option>
+                    <option text>성동구</option>
+                    <option text>성북구</option>
+                    <option text>송파구</option>
+                </optgroup>
+                <optgroup label="ㅇ">
+                    <option text>양천구</option>
+                    <option text>영등포구</option>
+                    <option text>용산구</option>
+                    <option text>은평구</option>
+                </optgroup>
+                <optgroup label="ㅈ">
+                    <option text>종로구</option>
+                    <option text>중구</option>
+                    <option text>중랑구</option>
+                </optgroup>
+              </select>
+
+              <div class="form-group">
+                  <label>글제목 </label>
+                <input type="text" name="title" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="hidden" name="uid" class="form-control" th:value="${session.loginmember.uid}">
+              </div>
+             
+              <div class="form-group">
+                   <label>내용 </label>
+                 <textarea name="content" cols="15" rows="15" class="form-control"></textarea>          
+              </div>
+              <div class="form-group">
+                  <label>첨부파일 </label> 
+                  <input type="file" name="mf" class="form-control">                                   
+              </div>
+              <div class="form-group">
+                <input type="submit" value="글등록" id="btn_newpost" class="btn btn-primary py-3 px-5">
+              </div>
+        </form>
+      
+      </div>
+
+    </div>
+</div> -->
