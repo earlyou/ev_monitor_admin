@@ -4,7 +4,7 @@
 <script>
 $(document).ready(function(){
 	$('#deletebtn').click(function(){
-		var pid = $('input[name="pid"]').val();
+		var id = $('input[name="pid"]').val();
 		var c = confirm('삭제 하시겠습니까?');
 		if(c == true){
 			location.href='delete?pid='+pid;
@@ -12,6 +12,13 @@ $(document).ready(function(){
 		
 	});
 	
+	$('#updatebtn').click(function(){
+		$('.post').attr({
+			'method':'post',
+			'action':'update'
+		});
+		$('.post').submit();
+	});
 });
 
 </script>
@@ -73,7 +80,8 @@ $(document).ready(function(){
             </div>
                             
                                       	
-            <a id="deletebtn" href="#">삭제</a>   
+            <a id="deletebtn" href="/delete">삭제</a> 
+            <a id="updatebtn" th:href="@{detail(pid=${com.pid})}">수정</a>  
             
         </form>
         
