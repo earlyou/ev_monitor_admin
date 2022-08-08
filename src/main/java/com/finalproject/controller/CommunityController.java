@@ -40,6 +40,7 @@ public class CommunityController {
 			e.printStackTrace();
 		}
 		m.addAttribute("center", "/cm/select");
+		
 		return "main";
 	}
 	
