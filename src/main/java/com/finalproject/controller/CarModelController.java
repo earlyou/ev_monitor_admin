@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.finalproject.biz.CarModelBiz;
+import com.finalproject.biz.ChargerBiz;
 import com.finalproject.frame.Util;
 import com.finalproject.vo.CarModelVO;
+import com.finalproject.vo.ChargerVO;
 
 
 @Controller
@@ -26,8 +28,21 @@ public class CarModelController {
 	@Autowired
 	CarModelBiz cmbiz;
 	
+	@Autowired
+	ChargerBiz chbiz;
+	
 	@RequestMapping("add")
 	public String add(Model m) {
+		
+		List<ChargerVO> chlist = null;
+		
+		try {
+			chlist = chbiz.get();
+			m.addAttribute("chlist", chlist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		m.addAttribute("center", "/vm/add");
 		return "main";
 	}

@@ -16,7 +16,7 @@ class StationDeleteTest {
 	@Test
 	void contextLoads() {
 		try {
-			sbiz.remove(28260005);
+			sbiz.remove("28260005");
 			System.out.println("Delete OK");
 		} catch (Exception e) {
 			e.printStackTrace();

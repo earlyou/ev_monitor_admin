@@ -4,21 +4,23 @@
 <script>
 $(document).ready(function(){
 	$('#deletebtn').click(function(){
-		var id = $('input[name="pid"]').val();
+		var pid = $('input[name="pid"]').val();
 		var c = confirm('삭제 하시겠습니까?');
 		if(c == true){
 			location.href='delete?pid='+pid;
 		}
 		
 	});
-	
+
 	$('#updatebtn').click(function(){
-		$('.post').attr({
+		$('.communitydetail').attr({
+			'enctype':'multipart/form-data',
 			'method':'post',
 			'action':'update'
 		});
-		$('.post').submit();
+		$('.communitydetail').submit();
 	});
+	
 });
 
 </script>
@@ -48,23 +50,74 @@ $(document).ready(function(){
             </div>
             
             <div class="form-group">
-                <input type="text" class="form-control form-control-user"
-                    name="statid" th:value="${comp.statid}" readonly="readonly">
-            </div>
+                 <select name="statid" id="statid" class="form-control form-control-item">
+                 	<option th:each="st:${stlist}" 
+                 	th:if="${st.statId != 0 }" 
+                 	th:value="${st.statId}" 
+                 	th:text="${st.statNm}"
+                 	th:selected="${st.statId} == ${comp.statid}">
+                 	</option>
+                 </select>
+	        </div>
             
             <div class="form-group">
-                <input type="text" class="form-control form-control-user"
-                    name="location" th:value="${comp.location}" readonly="readonly">
+      			<select name="location" id="location" th:field="${comp.location}" class="form-control form-control-item">
+     				<optgroup label="ㄱ">
+		 			<option value="서울특별시 강남구">서울특별시 강남구</option>
+	     			<option value="서울특별시 강동구">서울특별시 강동구</option>
+	     			<option value="서울특별시 강북구">서울특별시 강북구</option>
+         			<option value="서울특별시 강서구">서울특별시 강서구</option>
+	     			<option value="서울특별시 관악구">서울특별시 관악구</option>
+	     			<option value="서울특별시 광진구">서울특별시 광진구</option>
+	     			<option value="서울특별시 구로구">서울특별시 구로구</option>
+	     			<option value="서울특별시 금천구">서울특별시 금천구</option>      
+      				</optgroup>
+      				
+					<optgroup label="ㄴ">    
+		  			<option value="서울특별시 노원구">서울특별시 노원구</option>
+					</optgroup>
+					
+		  			<optgroup label="ㄷ">    
+			 		<option value="서울특별시 도봉구">서울특별시 도봉구</option>
+			 		<option value="서울특별시 동대문구">서울특별시 동대문구</option>
+			 		<option value="서울특별시 동작구">서울특별시 동작구</option>
+	      			</optgroup>
+		
+					<optgroup label="ㅁ">
+						<option value="서울특별시 마포구">서울특별시 마포구</option>
+					</optgroup>
+		    
+		    		<optgroup label="ㅅ">
+			    		<option value="서울특별시 서대문구">서울특별시 서대문구</option>
+			    		<option value="서울특별시 서초구">서울특별시 서초구</option>
+			    		<option value="서울특별시 성동구">서울특별시 성동구</option>
+			    		<option value="서울특별시 성북구">서울특별시 성북구</option>
+			    		<option value="서울특별시 송파구">서울특별시 송파구</option>
+		    		</optgroup>
+		    
+		    		<optgroup label="ㅇ">
+			    		<option value="서울특별시 양천구">서울특별시 양천구</option>
+			    		<option value="서울특별시 영등포구">서울특별시 영등포구</option>
+			    		<option value="서울특별시 용산구">서울특별시 용산구</option>
+			    		<option value="서울특별시 은평구">서울특별시 은평구</option>
+		   			</optgroup>
+		    
+		    		<optgroup label="ㅈ">
+			    		<option value="서울특별시 종로구">서울특별시 종로구</option>
+			    		<option value="서울특별시 중구">서울특별시 중구</option>
+			    		<option value="서울특별시 중랑구">서울특별시 중랑구</option>
+		    		</optgroup>   
+      </select>
             </div>
 
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                    name="title" th:value="${comp.title}" readonly="readonly">
+                    name="title" th:value="${comp.title}">
             </div>
 
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                    name="tf" th:value="${comp.tf}" readonly="readonly">
+                    name="tf" th:value="${comp.tf}">
             </div>       
             
             <div class="form-group">
@@ -72,16 +125,19 @@ $(document).ready(function(){
                 <input type="hidden" class="form-control form-control-user"
                     name="cimgname" th:value="${comp.cimgname}">
             </div>        
-        
+
+              <div class="form-group">
+                  <input type="file" class="form-control form-control-item"
+                      name="mf">
+              </div>          
                        
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
                     name="regdate" th:value="${#dates.format(comp.regdate,'yyyy/MM/dd hh:mm:ss')}" readonly="readonly">
             </div>
                             
-                                      	
-            <a id="deletebtn" href="/delete">삭제</a> 
-            <a id="updatebtn" th:href="@{detail(pid=${com.pid})}">수정</a>  
+            <a id="updatebtn" href="#">업데이트</a>                          	
+            <a id="deletebtn" href="#">삭제</a>   
             
         </form>
         

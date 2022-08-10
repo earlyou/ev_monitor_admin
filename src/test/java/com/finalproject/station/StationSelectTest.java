@@ -18,7 +18,7 @@ class StationSelectTest {
 		StationVO st = null;
 		
 		try {
-			st = sbiz.get(28260005);
+			st = sbiz.get("28260005");
 			System.out.println(st);
 		} catch (Exception e) {
 			

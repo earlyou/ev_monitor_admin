@@ -1,174 +1,130 @@
 <meta charset="UTF-8">
-<style>
-#formdiv{
-	margin: 80px;
-}
-</style>
-<script>
-    $(function(){
-        $('#btn_newpost').click(function(){	
-                    
-            $('#form_newpost').attr({
-                'enctype':'multipart/form-data',
-                'method':'post',
-                'action':'addimpl'
-            });
-            $('#form_newpost').submit();
-        });
-    });
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script th:inline="javascript">
 
-	<!-- bradcam_area  -->
-    <div class="bradcam_area bradcam_bg_1">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text">
-                        <h1 class="h2 text-gray-700 mb-25 text-center">커뮤니티 신규게시글 등록</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    
-   <!--form area   --> 
-    <div id="formdiv">
-    <div class="col-lg-8 col-md-8">
-	<h3 class="mb-30" >글작성_관리자</h3>
-	<form action="#">
-		<div class="mt-10">
-			<input type="text" name="cm.title" placeholder="글제목"
-				onfocus="this.placeholder = ''" onblur="this.placeholder = '글제목'" required
-				class="single-input">
-		</div>
-		<div class="mt-10">
-			<input type="text" name="last_name" placeholder="Last Name"
-				onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required
-				class="single-input">
-		</div>
-		<div class="mt-10">
-			<input type="text" name="last_name" placeholder="Last Name"
-				onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required
-				class="single-input">
-		</div>
-		<div class="mt-10">
-			<input type="email" name="EMAIL" placeholder="Email address"
-				onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required
-				class="single-input">
-		</div>
-		<div class="input-group-icon mt-10">
-			<div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
-			<input type="text" name="address" placeholder="Address" onfocus="this.placeholder = ''"
-				onblur="this.placeholder = 'Address'" required class="single-input">
-		</div>
-		<div class="input-group-icon mt-10">
-			<div class="form-select" id="default-select">
-				<select>
-				<option value=" 1">City</option>
-				<option value="1">Dhaka</option>
-				<option value="1">Dilli</option>
-				<option value="1">Newyork</option>
-				<option value="1">Islamabad</option>
-				</select>
-			</div>
-		</div>
-		<div class="input-group-icon mt-10">
-			<div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
-			<div class="form-select" id="default-select">
-				<select>
-				<option value=" 1">Country</option>
-				<option value="1">Bangladesh</option>
-				<option value="1">India</option>
-				<option value="1">England</option>
-				<option value="1">Srilanka</option>
-				</select>
-			</div>
-		</div>
-
-		<div class="mt-10">
-			<textarea class="single-textarea" placeholder="cm.textfield" onfocus="this.placeholder = ''"
-				onblur="this.placeholder = 'cm.textfield'" required></textarea>
-		</div>
-		
-	</form>
-	</div>
-	</div> 
+$(document).ready(function(){
 	
- <!--<div class="container">
-  
- <div class="row block-9">
-      <div class="col-md-6 order-md-last d-flex">
-         <form class="bg-white p-5 contact-form" id="form_newpost">
-            <h2 class="mb-4">글쓰기</h2>
-            <label for="sel3">지역구</label>
-            <select id="sel3" name="gu">
-                <optgroup label="선택안함">
-                    <option text>선택안함</option>
-                </optgroup>
-                <optgroup label="ㄱ">
-                    <option text>강남구</option>
-                    <option text>강동구</option>
-                    <option text>강북구</option>
-                    <option text>강서구</option>
-                    <option text>관악구</option>
-                    <option text>광진구</option>
-                    <option text>구로구</option>
-                    <option text>금천구</option>
-                </optgroup>
-                <optgroup label="ㄴ">    
-                    <option text>노원구</option>
-                </optgroup>
-                <optgroup label="ㄷ">    
-                    <option text>도봉구</option>
-                    <option text>동대문구</option>
-                    <option text>동작구</option>
-                </optgroup>
-                <optgroup label="ㅁ">
-                    <option text=>마포구</option>
-                </optgroup>
-                <optgroup label="ㅅ">
-                    <option text=>서대문구</option>
-                    <option text>서초구</option>
-                    <option text>성동구</option>
-                    <option text>성북구</option>
-                    <option text>송파구</option>
-                </optgroup>
-                <optgroup label="ㅇ">
-                    <option text>양천구</option>
-                    <option text>영등포구</option>
-                    <option text>용산구</option>
-                    <option text>은평구</option>
-                </optgroup>
-                <optgroup label="ㅈ">
-                    <option text>종로구</option>
-                    <option text>중구</option>
-                    <option text>중랑구</option>
-                </optgroup>
-              </select>
+	$('#registerbtn').click(function(){
+		var uid = $('input[name="uid"]').val();
+		var idl = [[${session.loginadmin.id}]];
+		
+		if(uid == null||uid == ''){
+		   alert('현재 접속한 ID를 삽입해 주세요.');
+		}else if(uid == idl){
+		$('.communitywrite').attr({
+			'enctype':'multipart/form-data',
+			'method':'post',
+			'action':'addimpl'
+		});
+		$('.communitywrite').submit();
+		}else{
+			alert('현재 접속한 ID와 일치하지 않습니다.');
+		}
+	});
+});
 
-              <div class="form-group">
-                  <label>글제목 </label>
-                <input type="text" name="title" class="form-control">
-              </div>
-              <div class="form-group">
-                <input type="hidden" name="uid" class="form-control" th:value="${session.loginmember.uid}">
-              </div>
-             
-              <div class="form-group">
-                   <label>내용 </label>
-                 <textarea name="content" cols="15" rows="15" class="form-control"></textarea>          
-              </div>
-              <div class="form-group">
-                  <label>첨부파일 </label> 
-                  <input type="file" name="mf" class="form-control">                                   
-              </div>
-              <div class="form-group">
-                <input type="submit" value="글등록" id="btn_newpost" class="btn btn-primary py-3 px-5">
-              </div>
-        </form>
-      
-      </div>
+</script>
+<form class="communitywrite">
+<div class="form-group">
+    <h1 class="h2 text-gray-700 mb-25 text-center">관리자 공지 등록</h1>
+</div>
+<br>   <br>  
 
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="uid">사용자 ID</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="uid">
     </div>
-</div> -->
+  </div> 
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="location">지역명</label>
+    <div class="col-sm-4">
+      <select name="location" id="location" class="form-control form-control-item">
+      <optgroup label="ㄱ">
+		 <option>서울특별시 강남구</option>
+	     <option>서울특별시 강동구</option>
+	     <option>서울특별시 강북구</option>
+         <option>서울특별시 강서구</option>
+	     <option>서울특별시 관악구</option>
+	     <option>서울특별시 광진구</option>
+	     <option>서울특별시 구로구</option>
+	     <option>서울특별시 금천구</option>      
+      </optgroup>
+		<optgroup label="ㄴ">    
+		  <option>서울특별시 노원구</option>
+		</optgroup>
+		  <optgroup label="ㄷ">    
+			 <option>서울특별시 도봉구</option>
+			 <option>서울특별시 동대문구</option>
+			 <option>서울특별시 동작구</option>
+	      </optgroup>
+		<optgroup label="ㅁ">
+			<option>서울특별시 마포구</option>
+		</optgroup>
+		    <optgroup label="ㅅ">
+			    <option>서울특별시 서대문구</option>
+			    <option>서울특별시 서초구</option>
+			    <option>서울특별시 성동구</option>
+			    <option>서울특별시 성북구</option>
+			    <option>서울특별시 송파구</option>
+		    </optgroup>
+		    <optgroup label="ㅇ">
+			    <option>서울특별시 양천구</option>
+			    <option>서울특별시 영등포구</option>
+			    <option>서울특별시 용산구</option>
+			    <option>서울특별시 은평구</option>
+		    </optgroup>
+		    <optgroup label="ㅈ">
+			    <option>서울특별시 종로구</option>
+			    <option>서울특별시 중구</option>
+			    <option>서울특별시 중랑구</option>
+		    </optgroup>   
+      </select>
+    </div>
+  </div> 
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="statid">상세 지역명</label>
+    <div class="col-sm-4">
+      <select name="statid" id="statid" class="form-control form-control-item">
+                  <option th:each="st:${stlist}" 
+                  th:if="${st.statId != 0}"
+                  th:value="${st.statId}" th:text="${st.statNm}">
+                  </option>
+      </select>
+    </div>
+  </div> 
+
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="title">제목</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="title">
+    </div>
+  </div>  
+
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="tf">글 내용</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="tf">
+    </div>
+  </div>  
+  
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="mf">이미지</label>
+    <div class="col-sm-4">
+      <input type="file" class="form-control" name="mf">
+    </div>
+  </div>    
+     
+ <br>  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="registerbtn" class="btn btn-success" style="width: 200px;">등록</button>
+    </div>
+  </div>  
+  
+</form>
+
+</html>
