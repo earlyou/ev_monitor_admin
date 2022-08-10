@@ -11,9 +11,9 @@ import com.finalproject.vo.StationVO;
 @Mapper
 public interface StationMapper {
 	public void insert(StationVO obj) throws Exception;
-	public void delete(int obj) throws Exception;
+	public void delete(String obj) throws Exception;
 	public void update(StationVO obj) throws Exception;
-	public StationVO select(int obj) throws Exception;
+	public StationVO select(String obj) throws Exception;
 	public List<StationVO> selectall() throws Exception;
 
 }

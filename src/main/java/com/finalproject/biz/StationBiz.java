@@ -10,7 +10,7 @@ import com.finalproject.mapper.StationMapper;
 import com.finalproject.vo.StationVO;
 
 @Service
-public class StationBiz implements Biz<Integer, StationVO>{
+public class StationBiz implements Biz<String, StationVO>{
 
 	@Autowired
 	StationMapper sdao;
@@ -28,13 +28,13 @@ public class StationBiz implements Biz<Integer, StationVO>{
 	}
 
 	@Override
-	public void remove(Integer k) throws Exception {
+	public void remove(String k) throws Exception {
 		sdao.delete(k);
 		
 	}
 
 	@Override
-	public StationVO get(Integer k) throws Exception {
+	public StationVO get(String k) throws Exception {
 		return sdao.select(k);
 	}
 

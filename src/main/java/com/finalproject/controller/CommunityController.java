@@ -7,12 +7,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.finalproject.biz.CommunityBiz;
+import com.finalproject.biz.StationBiz;
 import com.finalproject.biz.UsersBiz;
 import com.finalproject.frame.Util;
 import com.finalproject.vo.CommunityVO;
+import com.finalproject.vo.StationVO;
 
 @Controller
 @RequestMapping("/cm")
@@ -30,6 +31,25 @@ public class CommunityController {
 	@Autowired
 	UsersBiz ubiz;
 	
+	@Autowired
+	StationBiz stbiz;
+	
+	@RequestMapping("add")
+	public String add(Model m) {
+		
+		List<StationVO> stlist = null;
+		try {
+			stlist = stbiz.get();
+			m.addAttribute("stlist", stlist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		m.addAttribute("center", "/cm/add");
+		return "main";
+	}
+	
+	
 	@RequestMapping("select")
 	public String select(Model m) {
 		List<CommunityVO> list = null;
@@ -45,24 +65,18 @@ public class CommunityController {
 	}
 	
 
-	@RequestMapping("add")
-	public String add(Model m) {
-		m.addAttribute("center", "/cm/add");
-		return "main";
-	}
-	
 	@RequestMapping("/addimpl")
 	public String addimpl(Model m, CommunityVO commu) {
 		
-		String cimgname = ((MultipartFile) commu.getMf()).getOriginalFilename();
-		commu.setCimgname(cimgname);
+		String cimg = commu.getMf().getOriginalFilename();
+		commu.setCimgname(cimg);
 		try {
 			commubiz.register(commu);
-			Util.saveFile((MultipartFile) commu.getMf(), admindir, userdir);
+			Util.saveFile(commu.getMf(),admindir,userdir);
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
+		m.addAttribute("center", "/cm/detail");
 		return "redirect:select";
 	}
 	
@@ -70,10 +84,13 @@ public class CommunityController {
 	@RequestMapping("/detail")
 	public String detail(Model m, int pid) {
 		CommunityVO review = null;
+		List<StationVO> stlist = null;
 	
 			try {
 				review = commubiz.get(pid);
 				m.addAttribute("comp", review);
+				stlist = stbiz.get();
+				m.addAttribute("stlist", stlist);
 			} catch (Exception e) {				
 				e.printStackTrace();
 			}
@@ -85,10 +102,10 @@ public class CommunityController {
 	@RequestMapping("/update")
 	public String update(Model m, CommunityVO commu) {
 		
-		String cimgname = ((MultipartFile) commu.getMf()).getOriginalFilename();
+		String cimgname = commu.getMf().getOriginalFilename();
 		if(!(cimgname.equals(""))){
 			commu.setCimgname(cimgname);
-			Util.saveFile((MultipartFile) commu.getMf(),admindir,userdir);
+			Util.saveFile(commu.getMf(),admindir,userdir);
 		}	
 		
 		try {
@@ -97,7 +114,7 @@ public class CommunityController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:detail?postid="+commu.getPid();
+		return "redirect:detail?pid="+commu.getPid();
 	}
 	
 	@RequestMapping("/delete")

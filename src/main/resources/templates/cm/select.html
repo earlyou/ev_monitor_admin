@@ -13,38 +13,38 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>포스트ID</th>
-                        <th>사용자ID</th>
-                        <th>충전소ID</th>
-                        <th>지역</th>
-                        <th>제목</th>
-                        <th>글 내용</th>
-                        <th>이미지</th>
-                        <th>등록일</th>
+                        <th>POSTID</th>
+                        <th>UID</th>
+                        <th>STATID</th>
+                        <th>LOCATION</th>
+                        <th>TITLE</th>
+                        <th>TF</th>
+                        <th>CIMGNAME</th>
+                        <th>REGDATE</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>포스트ID</th>
-                        <th>사용자ID</th>
-                        <th>충전소ID</th>
-                        <th>지역</th>
-                        <th>제목</th>
-                        <th>글 내용</th>
-                        <th>이미지</th>
-                        <th>등록일</th>
+                        <th>POSTID</th>
+                        <th>UID</th>
+                        <th>STATID</th>
+                        <th>LOCATION</th>
+                        <th>TITLE</th>
+                        <th>TF</th>
+                        <th>CIMGNAME</th>
+                        <th>REGDATE</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                    <tr th:each="com:${comlist}">
-                        <td><a th:text="${com.pid}" th:href="@{detail(pid=${com.pid})}">pid</a></td>
-                        <td th:text="${com.uid}">uid</td>
-                        <td th:text="${com.statid}">statid</td>
-                        <td th:text="${com.location}">location</td>
-                        <td th:text="${com.title}">title</td>
-                        <td th:text="${com.tf}">tf</td>
-                        <td th:text="@{'/img/'+${com.cimgname}}">cimgname</td>
-                        <td th:text="${#dates.format(com.regdate,'yyyy-MM-dd hh:mm:ss')}">regdate</td>
+                    <tr th:each="post:${postlist}">
+                        <td><a th:text="${post.pid}" th:href="@{detail(pid=${post.pid})}">pid</a></td>
+                        <td th:text="${post.uid}">uid</td>
+                        <td th:text="${post.statid}">statid</td>
+                        <td th:text="${post.location}">location</td>
+                        <td th:text="${post.title}">title</td>
+                        <td th:text="${post.tf}">tf</td>
+                        <td><img th:src="@{'/img/'+${post.cimgname}}"></td>
+                        <td th:text="${#dates.format(post.regdate,'yyyy-MM-dd hh:mm:ss')}">regdate</td>
                     </tr> 
                 </tbody>
             </table>

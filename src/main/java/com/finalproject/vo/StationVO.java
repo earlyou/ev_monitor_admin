@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class StationVO {
 	
-	private int statId;
+	private String statId;
 	private String statNm;
 	private String addr;
 	private String location;

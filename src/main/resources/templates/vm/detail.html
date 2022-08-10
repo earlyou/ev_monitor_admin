@@ -69,13 +69,18 @@ $(document).ready(function(){
             </div>
  
              <div class="form-group">
-                <input type="number" class="form-control form-control-user"
-                    name="fptid" th:value="${cmv.fptid}">
+      			<select name="fptid" id="fptid" th:field="${cmv.fptid}" class="form-control form-control-item">
+      			<option value="1">DC차데모</option>
+      			<option value="4">DC콤보</option>
+      			<option value="7">AC3상</option>
+      			</select>
             </div>
             
             <div class="form-group">
-                <input type="number" class="form-control form-control-user"
-                    name="sptid" th:value="${cmv.sptid}">
+      			<select name="sptid" id="sptid" th:field="${cmv.sptid}" class="form-control form-control-item">
+      			<option value="2">AC완속</option>
+      			<option value="7">AC3상</option>
+      			</select>
             </div>         
 
               <div class="form-group">
