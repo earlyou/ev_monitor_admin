@@ -36,7 +36,7 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    <tr th:each="post:${postlist}">
+                    <tr th:each="post:${comlist}">
                         <td><a th:text="${post.pid}" th:href="@{detail(pid=${post.pid})}">pid</a></td>
                         <td th:text="${post.uid}">uid</td>
                         <td th:text="${post.statid}">statid</td>
