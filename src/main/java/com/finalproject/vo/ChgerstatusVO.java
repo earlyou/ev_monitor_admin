@@ -12,9 +12,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class ChgerstatusVO {
-	
+
+	private String chargerId;
+	private String statId;
 	private int chgerId;
-	private int statId;
 	private int stat;
 	private String method;
 	private int output;
@@ -26,7 +27,7 @@ public class ChgerstatusVO {
 	private String delDetail;
 	private int chgerType;
 	
-	public ChgerstatusVO(int statId, int stat, String method, int output, String statUpdDt, String lastTsdt,
+	public ChgerstatusVO(String statId, int stat, String method, int output, String statUpdDt, String lastTsdt,
 			String lastTedt, String nowTsdt, String delYn, String delDetail, int chgerType) {
 		this.statId = statId;
 		this.stat = stat;

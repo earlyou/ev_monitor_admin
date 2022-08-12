@@ -44,8 +44,7 @@ public class StationBiz implements Biz<String, StationVO>{
 	}
 
 	
-
-
-	
-	
+	public void upsert(List<StationVO> list) throws Exception {
+		sdao.upsert(list);
+	}
 }

@@ -26,4 +26,34 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM chgerstatus WHERE chgerId=#{chgerId}
 	</delete>
 	
+	
+	<insert id="upsert" parameterType="java.util.List">
+		INSERT INTO chgerstatus 
+		(chargerId,statId,chgerId,
+		stat,method,output,statUpdDt,
+		lastTsdt,lastTedt,nowTsdt,
+		delYn,delDetail,chgerType) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.chargerId},#{item.statId},
+			#{item.chgerId},#{item.stat},
+			#{item.method},#{item.output},
+			#{item.statUpdDt},#{item.lastTsdt},
+			#{item.lastTedt},#{item.nowTsdt},
+			#{item.delYn},#{item.delDetail},
+			#{item.chgerType})
+		</foreach>
+		ON DUPLICATE KEY UPDATE 
+		statId=VALUES(statId),
+		chgerId=VALUES(chgerId),
+		stat=VALUES(stat),
+		method=VALUES(method),
+		output=VALUES(output),
+		statUpdDt=VALUES(statUpdDt),
+		lastTsdt=VALUES(lastTsdt),
+		lastTedt=VALUES(lastTedt),
+		nowTsdt=VALUES(nowTsdt),
+		delYn=VALUES(delYn),
+		delDetail=VALUES(delDetail),
+		chgerType=VALUES(chgerType)
+	</insert>
 </mapper>

@@ -15,5 +15,5 @@ public interface ChgerstatusMapper {
 	public void update(ChgerstatusVO obj) throws Exception;
 	public ChgerstatusVO select(int obj) throws Exception;
 	public List<ChgerstatusVO> selectall() throws Exception;
-
+	public void upsert(List<ChgerstatusVO> list) throws Exception;
 }
