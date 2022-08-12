@@ -40,6 +40,8 @@ public class ChgerstatusBiz implements Biz<Integer, ChgerstatusVO>{
 		return ctdao.selectall();
 	}
 
-	
+	public void upsert(List<ChgerstatusVO> list) throws Exception {
+		ctdao.upsert(list);
+	}
 
 }
