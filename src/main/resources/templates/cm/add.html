@@ -4,7 +4,11 @@
     
 <script th:inline="javascript">
 
+
+
+<script>
 $(document).ready(function(){
+
 	
 	$('#registerbtn').click(function(){
 		var uid = $('input[name="uid"]').val();
@@ -87,6 +91,13 @@ $(document).ready(function(){
       <input type="text" class="form-control" name="uid">
     </div>
   </div> 
+  
+  <div class="form-group">
+    <div class="col-sm-4">
+      <input type="hidden" name="statid" id="statid" class="form-control" 
+      onfocus="this.placeholder = ''" onblur="this.placeholder = '충전소아이디'">
+    </div>
+  </div>   
 
   <div class="form-group">
     <label class="control-label col-sm-2" for="autoComplete">위치</label>
@@ -167,6 +178,5 @@ $(document).ready(function(){
 			    <option>서울특별시 중랑구</option>
 		    </optgroup>   
       </select> -->
-      
   
 </html>
