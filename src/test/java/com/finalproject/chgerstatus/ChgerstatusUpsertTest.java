@@ -48,8 +48,7 @@ class ChgerstatusUpsertTest {
 		int chgerId = 0;
 		int stat = 0;
 		String method = "";
-		String Output = "";
-		int output = 0;
+		String output = "";
 		String statUpdDt = "";
 		String lastTsdt = "";
 		String lastTedt = "";
@@ -85,9 +84,9 @@ class ChgerstatusUpsertTest {
 				chargerId = statId+chgerId;
 				stat = Integer.parseInt(item.getJSONObject(i).get("stat").toString());
 				method = item.getJSONObject(i).get("method").toString();
-				try {
-					output = Integer.parseInt(item.getJSONObject(i).get("output").toString());
-				} catch (NumberFormatException e) {
+				output = item.getJSONObject(i).get("output").toString();
+				if (output == "") {
+					output = null;
 				}
 				statUpdDt = item.getJSONObject(i).get("statUpdDt").toString();
 				lastTsdt = item.getJSONObject(i).get("lastTsdt").toString();
@@ -115,7 +114,10 @@ class ChgerstatusUpsertTest {
 					chargerId = statId+chgerId;
 					stat = Integer.parseInt(item.getJSONObject(j).get("stat").toString());
 					method = item.getJSONObject(j).get("method").toString();
-					output = Integer.parseInt(item.getJSONObject(j).get("output").toString());
+					output = item.getJSONObject(j).get("output").toString();
+					if (output == "") {
+						output = null;
+					}
 					statUpdDt = item.getJSONObject(j).get("statUpdDt").toString();
 					lastTsdt = item.getJSONObject(j).get("lastTsdt").toString();
 					lastTedt = item.getJSONObject(j).get("lastTedt").toString();
