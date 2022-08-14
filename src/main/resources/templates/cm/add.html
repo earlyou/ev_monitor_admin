@@ -1,6 +1,7 @@
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    
 <script th:inline="javascript">
 
 $(document).ready(function(){
@@ -22,6 +23,55 @@ $(document).ready(function(){
 			alert('현재 접속한 ID와 일치하지 않습니다.');
 		}
 	});
+	
+	$('#autoComplete').autocomplete({ // autocomplete 구현 시작부
+        source : function(reuqest, response) {
+            $.ajax({
+                type : 'POST',
+                url: '/autocomplete',
+                dataType: "json",
+                data: {searchValue:  $('#autoComplete').val()},
+                success : function(data) {
+                    // 서버에서 json 데이터 response 후 목록 추가
+                    response(
+                        $.map(data, function(item) {
+                            return {
+                                label : item.statNm,
+                                value : item.statNm,
+                                id : item.statId,
+                                addr : item.addr
+                            }
+                        })
+                    );
+                },
+                 error:function(request,status,error){       
+                	 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);       
+               	},
+            });
+        },
+        select : function(event, ui) { // item 선택 시 이벤트
+            console.log(ui.item);
+        	
+        	// hidden input에 statId, addr 자른값 넣기
+        	var location = ui.item.addr.split(' ', 2).join(" ");
+        	$("#statid").val(ui.item.id);
+        	$("#location").val(location);
+        },
+        focus : function(event, ui) { // 포커스 시 이벤트
+            return false;
+        },
+        minLength : 1, // 최소 글자 수
+        autoFocus : true, // true로 설정 시 메뉴가 표시 될 때, 첫 번째 항목에 자동으로 초점이 맞춰짐
+        classes : { // 위젯 요소에 추가 할 클래스를 지정
+            'ui-autocomplete' : 'highlight'
+        },
+        delay : 500, // 입력창에 글자가 써지고 나서 autocomplete 이벤트 발생될 떄 까지 지연 시간(ms)
+        disable : false, // 해당 값 true 시, 자동완성 기능 꺼짐
+        position : { my : 'right top', at : 'right bottom'}, // 제안 메뉴의 위치를 식별
+        close : function(event) { // 자동완성 창 닫아질 때의 이벤트
+            console.log(event);
+        }
+    });
 });
 
 </script>
@@ -39,9 +89,44 @@ $(document).ready(function(){
   </div> 
 
   <div class="form-group">
-    <label class="control-label col-sm-2" for="location">지역명</label>
+    <label class="control-label col-sm-2" for="autoComplete">위치</label>
     <div class="col-sm-4">
-      <select name="location" id="location" class="form-control form-control-item">
+      <input type="text" class="form-control" name="statNm" id="autoComplete">
+    </div>
+  </div> 
+  <input type="hidden" name="statid" placeholder="충전소아이디" id="statid">
+  <input type="hidden" name="location" placeholder="지역" id="location">
+
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="title">제목</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="title">
+    </div>
+  </div>  
+
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="tf">글 내용</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" name="tf">
+    </div>
+  </div>  
+  
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="mf">이미지</label>
+    <div class="col-sm-4">
+      <input type="file" class="form-control" name="mf">
+    </div>
+  </div>    
+     
+ <br>  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="registerbtn" class="btn btn-success" style="width: 200px;">등록</button>
+    </div>
+  </div>  
+  
+</form>
+<!-- <select name="location" id="location" class="form-control form-control-item">
       <optgroup label="ㄱ">
 		 <option>서울특별시 강남구</option>
 	     <option>서울특별시 강동구</option>
@@ -81,50 +166,7 @@ $(document).ready(function(){
 			    <option>서울특별시 중구</option>
 			    <option>서울특별시 중랑구</option>
 		    </optgroup>   
-      </select>
-    </div>
-  </div> 
-
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="statid">상세 지역명</label>
-    <div class="col-sm-4">
-      <select name="statid" id="statid" class="form-control form-control-item">
-                  <option th:each="st:${stlist}" 
-                  th:if="${st.statId != 0}"
-                  th:value="${st.statId}" th:text="${st.statNm}">
-                  </option>
-      </select>
-    </div>
-  </div> 
-
-   <div class="form-group">
-    <label class="control-label col-sm-2" for="title">제목</label>
-    <div class="col-sm-4">
-      <input type="text" class="form-control" name="title">
-    </div>
-  </div>  
-
-   <div class="form-group">
-    <label class="control-label col-sm-2" for="tf">글 내용</label>
-    <div class="col-sm-4">
-      <input type="text" class="form-control" name="tf">
-    </div>
-  </div>  
+      </select> -->
+      
   
-    <div class="form-group">
-    <label class="control-label col-sm-2" for="mf">이미지</label>
-    <div class="col-sm-4">
-      <input type="file" class="form-control" name="mf">
-    </div>
-  </div>    
-     
- <br>  
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button id="registerbtn" class="btn btn-success" style="width: 200px;">등록</button>
-    </div>
-  </div>  
-  
-</form>
-
 </html>
