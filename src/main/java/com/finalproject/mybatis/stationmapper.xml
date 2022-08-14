@@ -29,5 +29,33 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="searchstat" parameterType="String" resultType="stationVO">
 		SELECT statId, statNm, addr FROM station WHERE CONCAT(statNm, addr) REGEXP #{search}
 	</select>
+  
+	<insert id="upsert" parameterType="java.util.List">
+		INSERT INTO station 
+		(statId,statNm,addr,
+		location,zcode,lat,lng,
+		useTime,parkingFree,note,
+		limitYn,limitDetail,busiId,
+		bnm,busiNm,busiCall) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.statId},#{item.statNm},
+			#{item.addr},#{item.location},
+			#{item.zcode},#{item.lat},
+			#{item.lng},#{item.useTime},
+			#{item.parkingFree},#{item.note},
+			#{item.limitYn},#{item.limitDetail},
+			#{item.busiId},#{item.bnm},
+			#{item.busiNm},#{item.busiCall})
+		</foreach>
+		ON DUPLICATE KEY UPDATE 
+		statNm=VALUES(statNm),addr=VALUES(addr),
+		location=VALUES(location),zcode=VALUES(zcode),
+		lat=VALUES(lat),lng=VALUES(lng),
+		useTime=VALUES(useTime),parkingFree=VALUES(parkingFree),
+		note=VALUES(note),limitYn=VALUES(limitYn),
+		limitDetail=VALUES(limitDetail),busiId=VALUES(busiId),
+		bnm=VALUES(bnm),busiNm=VALUES(busiNm),
+		busiCall=VALUES(busiCall)
+	</insert>
 	
 </mapper>

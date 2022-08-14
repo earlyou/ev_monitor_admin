@@ -43,11 +43,11 @@ public class StationBiz implements Biz<String, StationVO>{
 		return sdao.selectall();
 	}
 
-	
 	public List<StationVO> searchstat(String search) throws Exception{
 		return sdao.searchstat(search);
 	}
 
-	
-	
+	public void upsert(List<StationVO> list) throws Exception {
+		sdao.upsert(list);
+	}
 }
