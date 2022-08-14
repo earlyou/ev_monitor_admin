@@ -71,7 +71,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	count(CASE WHEN usertypeid=200 THEN 1 END) as UA200members
 	FROM users
 	WHERE regdate BETWEEN DATE_ADD(NOW(), INTERVAL -6 MONTH) AND NOW()
-	GROUP BY evcdate;
+	GROUP BY evcdate
+	ORDER BY evcdate DESC;
    </select> 
 
 </mapper>
