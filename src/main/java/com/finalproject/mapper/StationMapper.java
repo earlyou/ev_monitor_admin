@@ -17,6 +17,4 @@ public interface StationMapper {
 	public List<StationVO> selectall() throws Exception;
 	public List<StationVO> searchstat(String search) throws Exception;
 	public void upsert(List<StationVO> list) throws Exception;
-	
-	public List<StationVO> searchstat(String search) throws Exception;
 }
