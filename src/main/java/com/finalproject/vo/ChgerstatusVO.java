@@ -18,7 +18,7 @@ public class ChgerstatusVO {
 	private int chgerId;
 	private int stat;
 	private String method;
-	private int output;
+	private String output;
 	private String statUpdDt;
 	private String lastTsdt;
 	private String lastTedt;
@@ -27,7 +27,7 @@ public class ChgerstatusVO {
 	private String delDetail;
 	private int chgerType;
 	
-	public ChgerstatusVO(String statId, int stat, String method, int output, String statUpdDt, String lastTsdt,
+	public ChgerstatusVO(String statId, int stat, String method, String output, String statUpdDt, String lastTsdt,
 			String lastTedt, String nowTsdt, String delYn, String delDetail, int chgerType) {
 		this.statId = statId;
 		this.stat = stat;

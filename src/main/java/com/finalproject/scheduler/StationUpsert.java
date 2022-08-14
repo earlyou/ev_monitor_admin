@@ -22,7 +22,7 @@ public class StationUpsert {
 	@Autowired
 	UpsertAPI upsertapi;
 	
-	@Scheduled(cron = "0 0 2 * * *") // everyday at 2AM
+	@Scheduled(cron = "0 0 */2 * * *") // everyday at 2AM
 	public void upsertstation() {
 		System.out.println("----------- Station Upsert ------------");
 		JSONObject data = null;

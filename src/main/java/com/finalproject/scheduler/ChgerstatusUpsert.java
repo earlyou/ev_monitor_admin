@@ -24,7 +24,6 @@ public class ChgerstatusUpsert {
 	
 	@Scheduled(cron = "0 */10 * * * *") // every 10 minutes
 	public void upsertstation() {
-		System.out.println("----------- Charger Status Upsert ------------");
 		JSONObject data = null;
 		String region = "11";
 		String numOfRows = "10";
@@ -49,7 +48,7 @@ public class ChgerstatusUpsert {
 		int chgerId = 0;
 		int stat = 0;
 		String method = "";
-		int output = 0;
+		String output = "";
 		String statUpdDt = "";
 		String lastTsdt = "";
 		String lastTedt = "";
@@ -85,7 +84,10 @@ public class ChgerstatusUpsert {
 				chargerId = statId+chgerId;
 				stat = Integer.parseInt(item.getJSONObject(i).get("stat").toString());
 				method = item.getJSONObject(i).get("method").toString();
-				output = Integer.parseInt(item.getJSONObject(i).get("output").toString());
+				output = item.getJSONObject(i).get("output").toString();
+				if (output == "") {
+					output = null;
+				}
 				statUpdDt = item.getJSONObject(i).get("statUpdDt").toString();
 				lastTsdt = item.getJSONObject(i).get("lastTsdt").toString();
 				lastTedt = item.getJSONObject(i).get("lastTedt").toString();
@@ -107,19 +109,22 @@ public class ChgerstatusUpsert {
 						break;
 					}
 					JSONArray item = response.getJSONObject(i).getJSONObject("body").getJSONObject("items").getJSONArray("item");
-					statId = item.getJSONObject(i).get("statId").toString();
-					chgerId = Integer.parseInt(item.getJSONObject(i).get("chgerId").toString());
+					statId = item.getJSONObject(j).get("statId").toString();
+					chgerId = Integer.parseInt(item.getJSONObject(j).get("chgerId").toString());
 					chargerId = statId+chgerId;
-					stat = Integer.parseInt(item.getJSONObject(i).get("stat").toString());
-					method = item.getJSONObject(i).get("method").toString();
-					output = Integer.parseInt(item.getJSONObject(i).get("output").toString());
-					statUpdDt = item.getJSONObject(i).get("statUpdDt").toString();
-					lastTsdt = item.getJSONObject(i).get("lastTsdt").toString();
-					lastTedt = item.getJSONObject(i).get("lastTedt").toString();
-					nowTsdt = item.getJSONObject(i).get("nowTsdt").toString();
-					delYn = item.getJSONObject(i).get("delYn").toString();
-					delDetail = item.getJSONObject(i).get("delDetail").toString();
-					chgerType = Integer.parseInt(item.getJSONObject(i).get("chgerType").toString());
+					stat = Integer.parseInt(item.getJSONObject(j).get("stat").toString());
+					method = item.getJSONObject(j).get("method").toString();
+					output = item.getJSONObject(j).get("output").toString();
+					if (output == "") {
+						output = null;
+					}
+					statUpdDt = item.getJSONObject(j).get("statUpdDt").toString();
+					lastTsdt = item.getJSONObject(j).get("lastTsdt").toString();
+					lastTedt = item.getJSONObject(j).get("lastTedt").toString();
+					nowTsdt = item.getJSONObject(j).get("nowTsdt").toString();
+					delYn = item.getJSONObject(j).get("delYn").toString();
+					delDetail = item.getJSONObject(j).get("delDetail").toString();
+					chgerType = Integer.parseInt(item.getJSONObject(j).get("chgerType").toString());
 					ChgerstatusVO chger = new ChgerstatusVO(chargerId, statId, chgerId, stat, method, output, statUpdDt, lastTsdt, lastTedt, nowTsdt, delYn, delDetail, chgerType);
 
 					modilist.add(chger);
@@ -132,6 +137,7 @@ public class ChgerstatusUpsert {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("=========================Fin.=========================");
 		end = System.currentTimeMillis();
 		System.out.println("데이터 업데이트하기: " + (double) ((end - start)/1000) + " s");
 		System.out.println("업데이트 된 데이터 수: "+newdata+" 개");
