@@ -26,6 +26,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM station WHERE statId=#{statId}
 	</delete>
 	
+	<select id="searchstat" parameterType="String" resultType="stationVO">
+		SELECT statId, statNm, addr FROM station WHERE CONCAT(statNm, addr) REGEXP #{search}
+	</select>
+  
 	<insert id="upsert" parameterType="java.util.List">
 		INSERT INTO station 
 		(statId,statNm,addr,

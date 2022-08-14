@@ -1,9 +1,13 @@
-<meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<script th:inline="javascript">
+<meta charset="UTF-8"> 
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+
+
+<script>
 $(document).ready(function(){
+
 	
 	$('#registerbtn').click(function(){
 		var uid = $('input[name="uid"]').val();
@@ -22,6 +26,53 @@ $(document).ready(function(){
 			alert('현재 접속한 ID와 일치하지 않습니다.');
 		}
 	});
+	
+	$('#autoComplete').autocomplete({ 
+        source : function(reuqest, response) {
+            $.ajax({
+                type : 'POST',
+                url: 'autocomplete',
+                dataType: "json",
+                data: {searchValue:  $('#autoComplete').val()},
+                success : function(data) {
+                    response(
+                        $.map(data, function(item) {
+                            return {
+                                label : item.statNm,
+                                value : item.statNm,
+                                id : item.statId,
+                                addr : item.addr
+                            }
+                        })
+                    );
+                },
+                 error:function(request,status,error){       
+                	 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);       
+               	},
+            });
+        },
+        select : function(event, ui) {
+            console.log(ui.item);
+
+        	var location = ui.item.addr.split(' ', 2).join(" ");
+        	$("#statid").val(ui.item.id);
+        	$("#location").val(location);
+        },
+        focus : function(event, ui) { 
+            return false;
+        },
+        minLength : 1, 
+        autoFocus : true, 
+        classes : { 
+            'ui-autocomplete' : 'highlight'
+        },
+        delay : 500, 
+        disable : false, 
+        position : { my : 'right top', at : 'right bottom'}, 
+        close : function(event) {
+            console.log(event);
+        }
+    });
 });
 
 </script>
@@ -37,63 +88,26 @@ $(document).ready(function(){
       <input type="text" class="form-control" name="uid">
     </div>
   </div> 
-
+  
   <div class="form-group">
-    <label class="control-label col-sm-2" for="location">지역명</label>
     <div class="col-sm-4">
-      <select name="location" id="location" class="form-control form-control-item">
-      <optgroup label="ㄱ">
-		 <option>서울특별시 강남구</option>
-	     <option>서울특별시 강동구</option>
-	     <option>서울특별시 강북구</option>
-         <option>서울특별시 강서구</option>
-	     <option>서울특별시 관악구</option>
-	     <option>서울특별시 광진구</option>
-	     <option>서울특별시 구로구</option>
-	     <option>서울특별시 금천구</option>      
-      </optgroup>
-		<optgroup label="ㄴ">    
-		  <option>서울특별시 노원구</option>
-		</optgroup>
-		  <optgroup label="ㄷ">    
-			 <option>서울특별시 도봉구</option>
-			 <option>서울특별시 동대문구</option>
-			 <option>서울특별시 동작구</option>
-	      </optgroup>
-		<optgroup label="ㅁ">
-			<option>서울특별시 마포구</option>
-		</optgroup>
-		    <optgroup label="ㅅ">
-			    <option>서울특별시 서대문구</option>
-			    <option>서울특별시 서초구</option>
-			    <option>서울특별시 성동구</option>
-			    <option>서울특별시 성북구</option>
-			    <option>서울특별시 송파구</option>
-		    </optgroup>
-		    <optgroup label="ㅇ">
-			    <option>서울특별시 양천구</option>
-			    <option>서울특별시 영등포구</option>
-			    <option>서울특별시 용산구</option>
-			    <option>서울특별시 은평구</option>
-		    </optgroup>
-		    <optgroup label="ㅈ">
-			    <option>서울특별시 종로구</option>
-			    <option>서울특별시 중구</option>
-			    <option>서울특별시 중랑구</option>
-		    </optgroup>   
-      </select>
+      <input type="hidden" name="statid" id="statid" class="form-control" 
+      onfocus="this.placeholder = ''" onblur="this.placeholder = '충전소아이디'">
     </div>
-  </div> 
+  </div>   
 
   <div class="form-group">
-    <label class="control-label col-sm-2" for="statid">상세 지역명</label>
     <div class="col-sm-4">
-      <select name="statid" id="statid" class="form-control form-control-item">
-                  <option th:each="st:${stlist}" 
-                  th:if="${st.statId != 0}"
-                  th:value="${st.statId}" th:text="${st.statNm}">
-                  </option>
-      </select>
+      <input type="hidden" name="location" id="location" class="form-control" 
+      onfocus="this.placeholder = ''" onblur="this.placeholder = '지역'">
+    </div>
+  </div>    
+
+  <div class="form-group">
+  <label class="control-label col-sm-2">위치</label>
+    <div class="col-sm-4">
+      <input type="text" name="statNm" id="autoComplete" class="form-control" 
+      onfocus="this.placeholder = ''">
     </div>
   </div> 
 
