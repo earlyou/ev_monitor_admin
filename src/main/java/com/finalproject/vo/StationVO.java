@@ -1,7 +1,5 @@
 package com.finalproject.vo;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,7 +51,12 @@ public class StationVO {
 		this.busiCall = busiCall;
 	}
 	
-	
+	public StationVO(String statId, String statNm, String addr) {
+		super();
+		this.statId = statId;
+		this.statNm = statNm;
+		this.addr = addr;
+	}
 
 	
 

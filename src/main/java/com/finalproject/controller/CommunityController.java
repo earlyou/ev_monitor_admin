@@ -37,25 +37,41 @@ public class CommunityController {
 	@RequestMapping("add")
 	public String add(Model m) {
 		
-		List<StationVO> stlist = null;
+		List<CommunityVO> list = null;
+		
 		try {
-			stlist = stbiz.get();
-			m.addAttribute("stlist", stlist);
+			list = commubiz.get();
+			m.addAttribute("comlist", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		m.addAttribute("center", "/cm/add");
+		 	m.addAttribute("center", "/cm/add");
 		return "main";
 	}
 	
+	@RequestMapping("/addimpl")
+	public String addimpl(CommunityVO obj, Model m) {
+		
+		String cimgname = obj.getMf().getOriginalFilename();
+		System.out.println(cimgname);
+		try {
+			obj.setCimgname(cimgname);
+			commubiz.register(obj);
+			Util.saveFile(obj.getMf(), admindir, userdir);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+				
+		return "redirect:select";
+	}
 	
 	@RequestMapping("select")
 	public String select(Model m) {
 		List<CommunityVO> list = null;
 		try {
 			list = commubiz.get();
-			m.addAttribute("postlist", list);
+			m.addAttribute("comlist", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,20 +81,7 @@ public class CommunityController {
 	}
 	
 
-	@RequestMapping("/addimpl")
-	public String addimpl(Model m, CommunityVO commu) {
-		
-		String cimg = commu.getMf().getOriginalFilename();
-		commu.setCimgname(cimg);
-		try {
-			commubiz.register(commu);
-			Util.saveFile(commu.getMf(),admindir,userdir);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		m.addAttribute("center", "/cm/detail");
-		return "redirect:select";
-	}
+
 	
 
 	@RequestMapping("/detail")
@@ -100,21 +103,15 @@ public class CommunityController {
 	}
 	
 	@RequestMapping("/update")
-	public String update(Model m, CommunityVO commu) {
-		
-		String cimgname = commu.getMf().getOriginalFilename();
-		if(!(cimgname.equals(""))){
-			commu.setCimgname(cimgname);
-			Util.saveFile(commu.getMf(),admindir,userdir);
-		}	
+	public String update(Model m, CommunityVO c) {
 		
 		try {
-			commubiz.modify(commu);
+			commubiz.modify(c);
 		} catch (Exception e) {		
 			e.printStackTrace();
 		}
 		
-		return "redirect:detail?pid="+commu.getPid();
+		return "redirect:detail?pid="+c.getPid();
 	}
 	
 	@RequestMapping("/delete")
@@ -127,6 +124,5 @@ public class CommunityController {
 		return "redirect:select?pid="+pid;
 	}
 	}
-
 
 
