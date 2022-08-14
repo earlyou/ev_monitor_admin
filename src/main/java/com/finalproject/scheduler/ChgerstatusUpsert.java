@@ -22,7 +22,7 @@ public class ChgerstatusUpsert {
 	@Autowired
 	UpsertAPI upsertapi;
 	
-	@Scheduled(cron = "0 */10 * * * *") // every 10 minutes
+	@Scheduled(cron = "0 */2 * * * *") // every 10 minutes
 	public void upsertstation() {
 		System.out.println("----------- Charger Status Upsert ------------");
 		JSONObject data = null;
