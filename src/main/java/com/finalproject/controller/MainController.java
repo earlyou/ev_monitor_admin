@@ -79,6 +79,17 @@ public class MainController {
 	public String loginimpl(Model m, String id, String pwd, HttpSession session) {
 		
 		UsersVO admin = null;
+		
+		List<CarModelVO> cmlist = null;
+		int custcnt = 0;
+		int admincnt = 0;
+		int carmodelcnt = 0;
+		int chargercnt = 0;
+		int communitycnt = 0;
+		int stationcnt = 0;
+		
+		
+		
 		try {
 			admin = ubiz.get(id);
 			if(admin == null) {
@@ -87,6 +98,18 @@ public class MainController {
 			if(admin.getPwd().equals(pwd) && admin.getUsertypeid()==200) {
 				session.setAttribute("loginadmin", admin);
 				m.addAttribute("center","center");	
+				custcnt = biz.getCustomerCnt();
+				admincnt = biz.getAdminCnt();
+				carmodelcnt = biz.getCarModelCnt();
+				chargercnt = biz.getChargerCnt();
+				communitycnt = biz.getCommunityCnt();
+				stationcnt = biz.getStationCnt();
+				m.addAttribute("custcnt", custcnt);
+				m.addAttribute("admincnt", admincnt);
+				m.addAttribute("carmodelcnt", carmodelcnt);
+				m.addAttribute("chargercnt", chargercnt);
+				m.addAttribute("communitycnt", communitycnt);
+				m.addAttribute("stationcnt",stationcnt);
 				return "main";
 			}else if(admin.getPwd().equals(pwd) && admin.getUsertypeid()!=200){	
 				m.addAttribute("loginfail","관리자 계정이 아닙니다.");

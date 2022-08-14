@@ -1,7 +1,9 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/udbt.css" /> 
-<script>
+
+<script th:inline="javascript">
 $(document).ready(function(){
 	$('#deletebtn').click(function(){
 		var pid = $('input[name="pid"]').val();
@@ -20,6 +22,55 @@ $(document).ready(function(){
 		});
 		$('.communitydetail').submit();
 	});
+	
+    $('#autoComplete').autocomplete({ // autocomplete 구현 시작부
+        source : function(reuqest, response) {
+            $.ajax({
+                type : 'POST',
+                url: '/autocomplete',
+                dataType: "json",
+                data: {searchValue:  $('#autoComplete').val()},
+                success : function(data) {
+                    // 서버에서 json 데이터 response 후 목록 추가
+                    response(
+                        $.map(data, function(item) {
+                            return {
+                                label : item.statNm,
+                                value : item.statNm,
+                                id : item.statId,
+                                addr : item.addr
+                            }
+                        })
+                    );
+                },
+                 error:function(request,status,error){       
+                	 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);       
+               	},
+            });
+        },
+        select : function(event, ui) { // item 선택 시 이벤트
+            console.log(ui.item);
+        	
+        	// hidden input에 statId, addr 자른값 넣기
+        	var location = ui.item.addr.split(' ', 2).join(" ");
+        	$("#statid").val(ui.item.id);
+        	$("#location").val(location);
+        },
+        focus : function(event, ui) { // 포커스 시 이벤트
+            return false;
+        },
+        minLength : 1, // 최소 글자 수
+        autoFocus : true, // true로 설정 시 메뉴가 표시 될 때, 첫 번째 항목에 자동으로 초점이 맞춰짐
+        classes : { // 위젯 요소에 추가 할 클래스를 지정
+            'ui-autocomplete' : 'highlight'
+        },
+        delay : 500, // 입력창에 글자가 써지고 나서 autocomplete 이벤트 발생될 떄 까지 지연 시간(ms)
+        disable : false, // 해당 값 true 시, 자동완성 기능 꺼짐
+        position : { my : 'right top', at : 'right bottom'}, // 제안 메뉴의 위치를 식별
+        close : function(event) { // 자동완성 창 닫아질 때의 이벤트
+            console.log(event);
+        }
+    });
 	
 });
 
@@ -49,66 +100,16 @@ $(document).ready(function(){
                     name="uid" th:value="${comp.uid}" readonly="readonly">
             </div>
             
-            <div class="form-group">
-                 <select name="statid" id="statid" class="form-control form-control-item">
-                 	<option th:each="st:${stlist}" 
-                 	th:if="${st.statId != 0 }" 
-                 	th:value="${st.statId}" 
-                 	th:text="${st.statNm}"
-                 	th:selected="${st.statId} == ${comp.statid}">
-                 	</option>
-                 </select>
-	        </div>
+              <div class="form-group">
+      			<input type="hidden" name="statid" id="statid" class="form-control" 
+      				onfocus="this.placeholder = ''" onblur="this.placeholder = '충전소아이디'" th:value="${comp.statid}">
+  			</div>  
             
-            <div class="form-group">
-      			<select name="location" id="location" th:field="${comp.location}" class="form-control form-control-item">
-     				<optgroup label="ㄱ">
-		 			<option value="서울특별시 강남구">서울특별시 강남구</option>
-	     			<option value="서울특별시 강동구">서울특별시 강동구</option>
-	     			<option value="서울특별시 강북구">서울특별시 강북구</option>
-         			<option value="서울특별시 강서구">서울특별시 강서구</option>
-	     			<option value="서울특별시 관악구">서울특별시 관악구</option>
-	     			<option value="서울특별시 광진구">서울특별시 광진구</option>
-	     			<option value="서울특별시 구로구">서울특별시 구로구</option>
-	     			<option value="서울특별시 금천구">서울특별시 금천구</option>      
-      				</optgroup>
-      				
-					<optgroup label="ㄴ">    
-		  			<option value="서울특별시 노원구">서울특별시 노원구</option>
-					</optgroup>
-					
-		  			<optgroup label="ㄷ">    
-			 		<option value="서울특별시 도봉구">서울특별시 도봉구</option>
-			 		<option value="서울특별시 동대문구">서울특별시 동대문구</option>
-			 		<option value="서울특별시 동작구">서울특별시 동작구</option>
-	      			</optgroup>
-		
-					<optgroup label="ㅁ">
-						<option value="서울특별시 마포구">서울특별시 마포구</option>
-					</optgroup>
-		    
-		    		<optgroup label="ㅅ">
-			    		<option value="서울특별시 서대문구">서울특별시 서대문구</option>
-			    		<option value="서울특별시 서초구">서울특별시 서초구</option>
-			    		<option value="서울특별시 성동구">서울특별시 성동구</option>
-			    		<option value="서울특별시 성북구">서울특별시 성북구</option>
-			    		<option value="서울특별시 송파구">서울특별시 송파구</option>
-		    		</optgroup>
-		    
-		    		<optgroup label="ㅇ">
-			    		<option value="서울특별시 양천구">서울특별시 양천구</option>
-			    		<option value="서울특별시 영등포구">서울특별시 영등포구</option>
-			    		<option value="서울특별시 용산구">서울특별시 용산구</option>
-			    		<option value="서울특별시 은평구">서울특별시 은평구</option>
-		   			</optgroup>
-		    
-		    		<optgroup label="ㅈ">
-			    		<option value="서울특별시 종로구">서울특별시 종로구</option>
-			    		<option value="서울특별시 중구">서울특별시 중구</option>
-			    		<option value="서울특별시 중랑구">서울특별시 중랑구</option>
-		    		</optgroup>   
-      </select>
-            </div>
+  			<div class="form-group">
+      			  <input type="text" class="form-control" name="statNm" id="autoComplete" 
+      			   th:value="${comp.statNm}">
+  			</div> 
+  				<input type="hidden" name="location" placeholder="지역" id="location" th:value="${comp.location}">
 
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
@@ -143,3 +144,4 @@ $(document).ready(function(){
         
 
 </div>
+</html>
