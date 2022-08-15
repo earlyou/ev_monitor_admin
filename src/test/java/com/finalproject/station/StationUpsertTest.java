@@ -24,7 +24,6 @@ class StationUpsertTest {
 	
 	@Test
 	void contextLoads() {
-		System.out.println("----------- Station Upsert ------------");
 		JSONObject data = null;
 		String region = "11";
 		String numOfRows = "10";
@@ -48,9 +47,9 @@ class StationUpsertTest {
 		String statNm = "";
 		String addr = "";
 		String location = "";
-		int zcode = 0;
-		double lat = 0.0;
-		double lng = 0.0;
+		String zcode = "";
+		String lat = "";
+		String lng = "";
 		String useTime = "";
 		String parkingFree = "";
 		String note = "";
@@ -77,6 +76,7 @@ class StationUpsertTest {
 		
 		start = System.currentTimeMillis();
 		
+		System.out.println("==================================================Start Inserting Station Information==================================================");
 			if (totalCount <= numofrows) {	// JSON이 1개일 때(데이터가 적은 수도권 이외 지역)
 				for (int i = 0; i < numofrows; i++) {
 					++cnt;
@@ -89,9 +89,9 @@ class StationUpsertTest {
 						statNm = item.getJSONObject(i).get("statNm").toString();
 						addr = item.getJSONObject(i).get("addr").toString();
 						location = item.getJSONObject(i).get("location").toString();
-						zcode = Integer.parseInt(item.getJSONObject(i).get("zcode").toString());
-						lat = Double.parseDouble(item.getJSONObject(i).get("lat").toString());
-						lng = Double.parseDouble(item.getJSONObject(i).get("lng").toString());
+						zcode = item.getJSONObject(i).get("zcode").toString();
+						lat = item.getJSONObject(i).get("lat").toString();
+						lng = item.getJSONObject(i).get("lng").toString();
 						useTime = item.getJSONObject(i).get("useTime").toString();
 						parkingFree = item.getJSONObject(i).get("parkingFree").toString();
 						note = item.getJSONObject(i).get("note").toString();
@@ -110,20 +110,20 @@ class StationUpsertTest {
 			}else {	// JSON이 2개 이상일 때(데이터가 많은 수도권)
 				JSONArray response = json.getJSONArray("response");
 				for (int i = 0; i < totalpage-1; i++) {
-					JSONArray item = response.getJSONObject(i).getJSONObject("body").getJSONObject("items").getJSONArray("item");
 					for (int j = 0; j < numofrows; j++) {
 						++cnt;
 						if (cnt > totalCount) {
 							break;
 						}
+						JSONArray item = response.getJSONObject(i).getJSONObject("body").getJSONObject("items").getJSONArray("item");
 						if (item.getJSONObject(j).get("chgerId").toString().equals("01")) {
 							statId = item.getJSONObject(j).get("statId").toString();
 							statNm = item.getJSONObject(j).get("statNm").toString();
 							addr = item.getJSONObject(j).get("addr").toString();
 							location = item.getJSONObject(j).get("location").toString();
-							zcode = Integer.parseInt(item.getJSONObject(i).get("zcode").toString());
-							lat = Double.parseDouble(item.getJSONObject(i).get("lat").toString());
-							lng = Double.parseDouble(item.getJSONObject(i).get("lng").toString());
+							zcode = item.getJSONObject(j).get("zcode").toString();
+							lat = item.getJSONObject(j).get("lat").toString();
+							lng = item.getJSONObject(j).get("lng").toString();
 							useTime = item.getJSONObject(j).get("useTime").toString();
 							parkingFree = item.getJSONObject(j).get("parkingFree").toString();
 							note = item.getJSONObject(j).get("note").toString();
@@ -146,6 +146,7 @@ class StationUpsertTest {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		System.out.println("===========================================================================Fin.===========================================================================");
 		end = System.currentTimeMillis();
 		System.out.println("데이터 입력하기: " + (double) ((end - start)/1000) + " s");
 		System.out.println("새로 입력된 데이터 수: "+newdata+" 개");
