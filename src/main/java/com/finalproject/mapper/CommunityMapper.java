@@ -16,5 +16,7 @@ public interface CommunityMapper {
 	public void update(CommunityVO commu) throws Exception;
 	public CommunityVO select(int pid) throws Exception;
 	public List <CommunityVO> selectall() throws Exception;
+	
+	public CommunityVO selectdetail(int pid) throws Exception;
 
 }
