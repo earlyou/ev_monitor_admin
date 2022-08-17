@@ -42,6 +42,8 @@ public class CommunityBiz implements Biz<Integer, CommunityVO> {
 		return commudao.selectall();
 	}
 
-
+	public CommunityVO selectdetail(Integer k) throws Exception {
+		return commudao.selectdetail(k);
+	}
 	
 }

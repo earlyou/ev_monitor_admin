@@ -28,6 +28,7 @@ public class CommunityVO  {
 	
 	private String statNm;
 	private int usertypeid;
+
 	
 	// insert
 	public CommunityVO(String uid, String statid, String location, String title, String tf, String cimgname) {
@@ -66,8 +67,22 @@ public class CommunityVO  {
 		this.statNm = statNm;
 		this.usertypeid = usertypeid;
 	}
-	
 
+
+	public CommunityVO(int pid, String uid, String statid, String location, String title, String tf, String cimgname,
+			Date regdate) {
+		super();
+		this.pid = pid;
+		this.uid = uid;
+		this.statid = statid;
+		this.location = location;
+		this.title = title;
+		this.tf = tf;
+		this.cimgname = cimgname;
+		this.regdate = regdate;
+	}
+	
+	
 
 	
 }

@@ -90,7 +90,7 @@ public class CommunityController {
 		List<StationVO> stlist = null;
 	
 			try {
-				review = commubiz.get(pid);
+				review = commubiz.selectdetail(pid);
 				m.addAttribute("comp", review);
 				stlist = stbiz.get();
 				m.addAttribute("stlist", stlist);
@@ -103,15 +103,20 @@ public class CommunityController {
 	}
 	
 	@RequestMapping("/update")
-	public String update(Model m, CommunityVO c) {
+	public String update(Model m, CommunityVO cm) {
 		
+		String community = cm.getMf().getOriginalFilename();
+		if(!(community.equals(""))){
+			cm.setCimgname(community);
+			Util.saveFile(cm.getMf(),admindir,userdir);
+		}
 		try {
-			commubiz.modify(c);
+			commubiz.modify(cm);
 		} catch (Exception e) {		
 			e.printStackTrace();
 		}
 		
-		return "redirect:detail?pid="+c.getPid();
+		return "redirect:detail?pid="+cm.getPid();
 	}
 	
 	@RequestMapping("/delete")
