@@ -28,6 +28,7 @@ public class CommunityVO  {
 	
 	private String statNm;
 	private int usertypeid;
+
 	
 	// insert
 	public CommunityVO(String uid, String statid, String location, String title, String tf, String cimgname) {

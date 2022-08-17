@@ -90,7 +90,7 @@ public class CommunityController {
 		List<StationVO> stlist = null;
 	
 			try {
-				review = commubiz.get(pid);
+				review = commubiz.selectdetail(pid);
 				m.addAttribute("comp", review);
 				stlist = stbiz.get();
 				m.addAttribute("stlist", stlist);
