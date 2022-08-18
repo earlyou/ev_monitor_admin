@@ -22,7 +22,7 @@ public class ChgerstatusUpsert {
 	@Autowired
 	UpsertAPI upsertapi;
 	
-	@Scheduled(cron = "0 */10 * * * *") // every 10 minutes
+	@Scheduled(cron = "0 */5 * * * *") // every 5 minutes
 	public void upsertstation() {
 		JSONObject data = null;
 		String region = "11";
@@ -31,7 +31,8 @@ public class ChgerstatusUpsert {
 		try {
 			data = upsertapi.data(2,numOfRows,region);
 		} catch (Exception e2) {
-			e2.printStackTrace();
+			System.out.println("데이터 불러오기 실패");
+			upsertstation();
 		}
 		double end = System.currentTimeMillis();
 		System.out.println("데이터 개요 불러오기: " + (double) ((end - start)/1000) + " s");
@@ -68,7 +69,8 @@ public class ChgerstatusUpsert {
 			end = System.currentTimeMillis();
 			System.out.println("데이터 불러오기 완료: " + (double) ((end - start)/1000) + " s");
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("데이터 불러오기 실패");
+			upsertstation();
 		}
 		
 		start = System.currentTimeMillis();
@@ -135,7 +137,8 @@ public class ChgerstatusUpsert {
 		try {
 			chgerstatusbiz.upsert(modilist);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("데이터 업데이트 실패");
+			upsertstation();
 		}
 		System.out.println("=========================Fin.=========================");
 		end = System.currentTimeMillis();
