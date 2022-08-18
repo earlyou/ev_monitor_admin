@@ -13,15 +13,6 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		ORDER BY c.pid DESC
 	</select>
 		
-	<!-- 글 detail select -->
-	<select id="selectdetail" parameterType="int" resultType="communityVO">
-		SELECT c.pid, c.uid, c.statid, s.statNm, s.lat, s.lng, c.location, c.title, c.tf, c.cimgname, c.regdate, u.usertypeid 
-		FROM community c INNER JOIN users u ON c.uid=u.id
-		LEFT JOIN station s ON c.statid=s.statId
-		WHERE c.pid=#{pid}
-		ORDER BY c.pid DESC
-	</select>
-		
 	<select id="select" parameterType="int" resultType="communityVO">
 		SELECT * FROM community WHERE pid=#{pid}
 	</select>
