@@ -31,7 +31,8 @@ public class StationUpsert {
 		try {
 			data = upsertapi.data(2,numOfRows,region);
 		} catch (Exception e2) {
-			e2.printStackTrace();
+			System.out.println("데이터 불러오기 실패");
+			upsertstation();
 		}
 		double end = System.currentTimeMillis();
 		System.out.println("데이터 개요 불러오기: " + (double) ((end - start)/1000) + " s");
@@ -71,7 +72,8 @@ public class StationUpsert {
 			end = System.currentTimeMillis();
 			System.out.println("데이터 불러오기: " + (double) ((end - start)/1000) + " s");
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			System.out.println("데이터 불러오기 실패");
+			upsertstation();
 		}
 		
 		start = System.currentTimeMillis();
@@ -144,7 +146,8 @@ public class StationUpsert {
 			try {
 				stationbiz.upsert(uplist);
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("데이터 업데이트 실패");
+				upsertstation();
 			}
 		System.out.println("===========================================================================Fin.===========================================================================");
 		end = System.currentTimeMillis();
